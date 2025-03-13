@@ -1,0 +1,62 @@
+<main class="d-flex flex-nowrap">
+  <div class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary sidebar-container ">
+      <ul class="nav nav-pills flex-column mb-auto">
+        
+        <li *ngIf="claim ==='admin'">
+          <a class="nav-link link-body-emphasis custom-link" [routerLink]="['/home/user-create']" routerLinkActive="active" >
+            Create User
+          </a>
+        </li>
+
+        <li *ngIf="claim ==='admin'">
+          <a class="nav-link link-body-emphasis custom-link" [routerLink]="['/home/user-role-assignment']" routerLinkActive="active" >
+            User Role Assignment
+          </a>
+        </li>
+
+        <li *ngIf="claim ==='admin'|| claim === 'customer.representative'">
+          <a class="nav-link link-body-emphasis custom-link" [routerLink]="['/home/customer-create']" routerLinkActive="active" >
+            Create Customer
+          </a>
+        </li>
+
+
+        <li *ngIf="claim ==='admin'|| claim === 'customer.representative'">
+          <a class="nav-link link-body-emphasis custom-link" [routerLink]="['/home/product-create']" routerLinkActive="active"  >
+            Create Product
+          </a>
+        </li>
+
+        <li *ngIf="claim === 'customer.representative'">
+          <a class="nav-link link-body-emphasis custom-link" [routerLink]="['/home/order-approve']" routerLinkActive="active"  >
+            Approve Order
+          </a>
+        </li>
+
+        <li *ngIf="claim === 'user'">
+          <a class="nav-link link-body-emphasis custom-link" [routerLink]="['/home/user-order']" routerLinkActive="active"  >
+            Order
+          </a>
+        </li>
+
+        <li *ngIf="claim === 'user'">
+          <a class="nav-link link-body-emphasis custom-link" [routerLink]="['/home/user-order-history']" routerLinkActive="active"  >
+            My Orders
+          </a>
+        </li>
+
+        <li *ngIf="claim ==='admin'|| claim === 'customer.representative'">
+          <a class="nav-link link-body-emphasis custom-link" [routerLink]="['/home/order']" routerLinkActive="active" >
+            Orders
+          </a>
+        </li>
+
+        <li *ngIf="claim ==='admin'|| claim === 'customer.representative'">
+          <a class="nav-link link-body-emphasis custom-link" [routerLink]="['/home/inventory']" routerLinkActive="active"  >
+              Inventories
+          </a>
+        </li>
+       
+      </ul>
+    </div>
+</main>

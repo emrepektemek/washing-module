@@ -1,0 +1,128 @@
+<div *ngIf="dataAdd == false" class="d-flex justify-content-center align-items-center">
+    <div class="spinner-border custom-spinner" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+</div>
+  
+
+<div class="container">
+    <main class="form-signin custom-main">
+        <form [formGroup]="registerForm">
+        <h2 class="custom-h2">Create User</h2>
+        <div class="custom-form-container">
+            <div class="form-floating">
+                <input 
+                    formControlName="email"
+                    type="email" 
+                    class="form-control custom-input" 
+                    id="floatingInput" 
+                    placeholder="name@example.com"
+                >
+                <label for="floatingInput">Email</label>
+            </div>
+        </div>
+       
+        <div class="custom-form-container">
+            <div class="form-floating">
+                <input 
+                    formControlName="password"
+                    type="password" 
+                    class="form-control custom-input" 
+                    id="floatingPassword" 
+                    placeholder="Password"  
+                >
+                <label for="floatingPassword">Password</label>
+            </div>
+        </div>
+    
+        <div class="container-fluid mb-3">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <div class="custom-form-container">
+                        <div class="form-floating">
+                            <input 
+                                formControlName="firstName"
+                                type="text" 
+                                class="form-control custom-input" 
+                                id="firstName" 
+                                placeholder="First Name"  
+                            >
+                            <label for="firstName">First Name</label>
+                        </div>
+                    </div>
+                    
+                </div>
+    
+              
+                <div class="col-md-6">
+                    <div class="custom-form-container">
+                        <div class="form-floating">
+                            <input 
+                                formControlName="lastName"
+                                type="text" 
+                                class="form-control custom-input" 
+                                id="lastName" 
+                                placeholder="Last Name"  
+                            >
+                            <label for="lastName">Last Name</label>
+                        </div>
+                    </div>
+                    
+                </div>
+    
+            </div>
+        </div>
+        
+    
+        <div class="custom-form-container">
+    
+            <div class="form-floating">
+                <input 
+                    formControlName="phoneNumber"
+                    type="tel" 
+                    class="form-control custom-input" 
+                    id="phoneNumber" 
+                    placeholder="Phone Number"  
+                >
+                <label for="phoneNumber">Phone Number</label>
+            </div>
+        </div>
+
+        <div class="custom-dropdown-container">
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle custom-dropdown-btn" type="button" id="genderDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    {{ selectedGender || "Select Gender" }}
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="genderDropdown">
+                    <li><a class="dropdown-item"  (click)="selectGender('Male')">Male</a></li>
+                    <li><a class="dropdown-item"  (click)="selectGender('Female')">Female</a></li>
+                    <li><a class="dropdown-item" (click)="selectGender('Other')">Other</a></li>
+                    <li><a class="dropdown-item text-muted"  (click)="selectGender('')">Clear Selection</a></li> 
+                </ul>
+            </div>
+        </div>
+
+        <div class="custom-dropdown-container">
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle custom-dropdown-btn" type="button" id="roleDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    {{ getRoleName(selectedRole) }}
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="genderDropdown">
+                    <li><a class="dropdown-item"  (click)="selectRole(2)">admin</a></li>
+                    <li><a class="dropdown-item"  (click)="selectRole(4)">user</a></li>
+                    <li><a class="dropdown-item" (click)="selectRole(5)">customer.representative</a></li>
+                    <li><a class="dropdown-item text-muted"  (click)="selectRole(0)">Clear Role</a></li> 
+                </ul>
+            </div>
+        </div>
+    
+        <div class="custom-btn-container">
+            <button class="btn custom-btn" type="submit" (click)="register()" >Create User</button>
+        </div>
+       
+        </form>
+    </main>
+
+</div>
+
+

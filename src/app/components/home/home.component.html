@@ -1,0 +1,25 @@
+<div *ngIf="dataLoaded == false" class="d-flex justify-content-center align-items-center">
+  <div class="spinner-border custom-spinner" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
+
+
+<div class="container-fluid">
+  <app-header></app-header>
+  <div class="main-content">
+    <app-sidebar ></app-sidebar>
+    
+    <div *ngIf="dataLoaded == false" class="d-flex justify-content-center align-items-center">
+      <div class="spinner-border custom-spinner" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+    
+    <div *ngIf="dataLoaded == true" class="home-container">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
+
+

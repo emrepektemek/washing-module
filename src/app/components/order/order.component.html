@@ -1,0 +1,64 @@
+<div *ngIf="dataLoaded == false" class="d-flex justify-content-center align-items-center">
+  <div class="spinner-border custom-spinner" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
+
+
+
+<div class="container">
+
+  <div class="custom-search-bar-container d-flex justify-content-center">
+    <form class="form-inline d-flex w-50">
+      <input 
+        class="form-control mr-sm-2 custom-input" 
+        type="search" 
+        placeholder="Search" 
+        aria-label="Search"  
+        [(ngModel)]="searchText"
+        name="search"
+      >
+    </form>
+  </div>
+  
+  <table class="table table-hover table-light custom-table">
+    <thead>
+      <tr class="align-middle">
+        <th scope="col">Order Id</th>
+        <th scope="col">Customer Name</th>
+        <th scope="col">Product Name</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Customer Address</th>
+        <th scope="col">Customer Phone Number</th>
+        <th scope="col">Customer Email</th>
+        <th scope="col">Order Date</th>
+        <th scope="col">Ship Date</th>
+        <th scope="col">Status</th>
+        <th scope="col">Approval</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="align-middle" *ngFor="let orderReport of filteredOrders">
+        <th scope="row">{{ orderReport.orderId }}</th>
+        <td>{{ orderReport.customerName }}</td>
+        <td class="custom-td">{{ orderReport.productName }}</td>
+        <td>{{ orderReport.quantity }}</td>
+        <td class="custom-td">{{ orderReport.customerAddress }}</td>
+        <td>{{ orderReport.customerPhoneNumber }}</td>
+        <td class="custom-td">{{ orderReport.customerEmail }}</td>
+        <td>{{ orderReport.orderDate | date:'yyyy-MM-dd HH:mm' }}</td>
+        <td *ngIf="orderReport.shipDate != null">{{ orderReport.shipDate | date:'yyyy-MM-dd HH:mm' }}</td>
+        <td *ngIf="orderReport.shipDate == null">Not shipped</td>
+        <td>
+           <i *ngIf="orderReport.orderStatus === true" class="fa-solid fa-circle custom-icon-success fa-sm"></i>
+           <i *ngIf="orderReport.orderStatus === false" class="fa-solid fa-circle custom-icon-danger  fa-sm"></i>
+        </td>
+        <td>
+          <i *ngIf="orderReport.isApproved === true" class="fa-solid fa-circle custom-icon-success fa-sm"></i>
+          <i *ngIf="orderReport.isApproved === false" class="fa-solid fa-circle custom-icon-danger  fa-sm"></i>
+          <i *ngIf="orderReport.isApproved === null" class="fa-regular fa-circle custom-icon-circle fa-sm"></i>
+       </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

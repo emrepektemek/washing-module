@@ -1,0 +1,95 @@
+<div *ngIf="dataAdd == false" class="d-flex justify-content-center align-items-center">
+  <div class="spinner-border custom-spinner" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
+
+
+<div class="container">
+    <main class="form-signin custom-main">
+        <form [formGroup]="productForm">
+        <h2 class="custom-h2">Create Product</h2>
+
+        <div class="custom-form-container">
+            <div class="form-floating">
+              <select
+                formControlName="categoryId"
+                class="form-control custom-input"
+                id="categoryId"
+                placeholder="Category"
+              >
+                <option value="0">Select Category</option>
+                <option *ngFor="let category of categories" [value]="category.id">
+                  {{ category.categoryName }}
+                </option>
+              </select>
+              <label for="categoryId">Category</label>
+            </div>
+        </div>
+
+    
+        <div class="custom-form-container">
+            <div class="form-floating">
+                <input 
+                    formControlName="productName"
+                    type="text" 
+                    class="form-control custom-input" 
+                    id="productName"   
+                    placeholder="Product Name"  
+                >
+                <label for="productName">Product Name</label>  
+            </div>
+        </div>
+
+        <div class="custom-form-container">
+            <div class="form-floating">
+                <input 
+                    formControlName="unitPrice"
+                    type="number"
+                    step="0.01" 
+                    class="form-control custom-input" 
+                    id="unitPrice"   
+                    placeholder="Unit Price"  
+                >
+                <label for="unitPrice">Unit Price</label>  
+            </div>
+        </div>
+
+        <div class="custom-dropdown-container">
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle custom-dropdown-btn" type="button" id="genderDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    {{ getSizeName(selectedSize) }}
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="genderDropdown">
+                    <li><a class="dropdown-item"  (click)="selectSize(1)">XS</a></li>
+                    <li><a class="dropdown-item"  (click)="selectSize(2)">S</a></li>
+                    <li><a class="dropdown-item" (click)="selectSize(3)">M</a></li>
+                    <li><a class="dropdown-item"  (click)="selectSize(4)">L</a></li>
+                    <li><a class="dropdown-item"  (click)="selectSize(5)">XL</a></li>
+                    <li><a class="dropdown-item" (click)="selectSize(6)">XXL</a></li>
+                    <li><a class="dropdown-item" (click)="selectSize(7)">XXXL</a></li>
+                    <li><a class="dropdown-item text-muted"  (click)="selectSize(0)">Clear Selection</a></li> 
+                </ul>
+            </div>
+        </div>
+
+        <div class="custom-form-container">
+            <div class="form-floating">
+                <input 
+                    formControlName="description"
+                    type="text" 
+                    class="form-control custom-input" 
+                    id="description"   
+                    placeholder="Description"  
+                >
+                <label for="description">Description</label>  
+            </div>
+        </div>
+
+        <div class="custom-btn-container">
+            <button class="btn custom-btn" type="submit" (click)="createProduct()">Create Product</button>
+        </div>
+
+        </form>
+    </main>
+</div>

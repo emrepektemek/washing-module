@@ -1,0 +1,62 @@
+html,
+body {
+  height: 100%;
+}
+
+.custom-main {
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    min-height: 100vh; 
+    width: 100%; 
+    margin: auto; 
+    margin-top: -100px;
+}
+
+.form-signin {
+  max-width: 330px;
+  padding: 1rem;
+}
+
+.form-signin .form-floating:focus-within {
+  z-index: 2;
+  
+}
+
+.form-control {
+  width: 300px; 
+  height: 40px; 
+  padding: 10px; 
+  font-size: 16px; 
+  margin-top: 20px; 
+}
+
+.logo-image {
+  width: 100px;             
+  height: 100px;             
+  margin-bottom: 50px;       
+  display: block;           
+  margin-left: auto;        
+  margin-right: auto;        
+}
+
+.custom-font {
+  font-family: 'Raleway', sans-serif;
+}
+
+.custom-btn {
+  width: 100%; 
+  padding-top: 0.5rem; 
+  padding-bottom: 0.5rem; 
+  margin-top: 30px;
+  background-color: rgb(123, 0, 232); 
+  color: white; 
+  border: none; 
+  border-radius: 5px; 
+}
+
+.custom-input:focus {
+  outline: none; 
+  box-shadow: 0 0 3px 2px rgb(123, 0, 232);
+  border-color: rgb(123, 0, 232);
+}

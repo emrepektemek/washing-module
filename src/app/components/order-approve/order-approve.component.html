@@ -1,0 +1,114 @@
+<div *ngIf="dataUpdated == false || dataLoaded == false" class="d-flex justify-content-center align-items-center">
+    <div class="spinner-border custom-spinner" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+  
+  
+  <div class="container">
+    <table class="table table-hover table-light custom-table ">
+      <thead>
+        <tr class="align-middle">
+          <th scope="col">Order Id</th>
+          <th scope="col">Customer</th>
+          <th scope="col">Product</th> 
+          <th scope="col">Quantity</th>     
+          <th scope="col">Customer Email</th>    
+          <th scope="col">Customer Addres</th>   
+          <th scope="col">Confirm</th>
+        </tr>
+      </thead>    
+  
+      <tbody>
+        <tr class="align-middle" *ngFor="let orderApprove of (orderApproveState.orderApproves$ | async)">
+          <td class="fw-bold">{{ orderApprove.id }}</td>  
+          <td>{{ orderApprove.customerName }}</td>
+          <td>{{ orderApprove.productName }}</td>
+          <td>{{ orderApprove.quantity }}</td>
+          <td class="custom-td text-truncate">{{ orderApprove.customerEmail }}</td>
+          <td>{{ orderApprove.customerAddress }}</td>  
+          <td>  
+            <button class="btn custom-yes-btn me-2" (click)="openAcceptModal(orderApprove.id, orderApprove.productId, orderApprove.quantity)">Yes</button>
+            <button class="btn custom-no-btn"(click)="openRejectModal(orderApprove.id)">No</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="modal fade" id="acceptModal" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <h4 class="custom-h4" >Are you sure you want to accept this order ?</h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        
+        <div class="modal-body">
+
+          <div class="form-container">
+
+            <div class="custom-form-container">
+                <select
+                  id="warehouseSelect"
+                  class="form-select custom-input"
+                  (change)="selectWarehouse($event)"
+                >
+                <option value="0">Select Warehouse</option>
+                <option *ngFor="let warehouse of filteredInventory" [value]="warehouse.warehouseId">
+                  {{ warehouse.warehouseName }}
+                </option>
+              </select>                     
+            </div>
+           
+
+            <input
+              type="text"
+              class="form-control custom-input"
+              [value]="selectedWarehouseLocation"
+              placeholder="Warehouse Location"
+              readonly
+            />
+          </div>
+           
+        </div>
+
+        <div class="modal-footer">
+
+          <div class="d-flex justify-content-evenly gap-4" style="width: 100%;">
+            <button type="button" class="btn btn-primary custom-btn" (click)="acceptOrder()" >Yes</button>
+            <button type="button" data-bs-dismiss="modal" class="btn btn-primary custom-btn" >No</button>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+  
+
+
+  <div class="modal fade" id="rejectModal" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="custom-h4" >Are you sure you want to reject this order ?</h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        
+        <div class="modal-body">
+          <div class="d-flex justify-content-evenly gap-4" style="width: 100%;">
+            <button type="button" class="btn btn-primary custom-btn" (click)="rejectOrder()" >Yes</button>
+            <button type="button" data-bs-dismiss="modal" class="btn btn-primary custom-btn" >No</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  
+
+  
+   
+  

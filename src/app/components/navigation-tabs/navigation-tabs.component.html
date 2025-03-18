@@ -1,0 +1,12 @@
+<div class="tabs-container">
+    <div class="tabs" #tabsContainer>
+      <div *ngFor="let tab of tabs; let i = index" 
+           class="tab" 
+           [class.active]="selectedIndex === i"
+           (click)="selectTab(i)">
+        {{ tab.label }}
+      </div>
+      <div class="indicator" [style.transform]="'translateX(' + (selectedIndex * 100) + '%)'">
+      </div>
+    </div>
+</div>

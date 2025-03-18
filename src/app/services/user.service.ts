@@ -18,12 +18,4 @@ export class UserService {
       ResponseListDataModel<UserOperationAssignmentModel>
     >(this.apiUrl + 'getusers');
   }
-
-  getUsersForCustomer(): Observable<
-    ResponseListDataModel<UserForCustomerModel>
-  > {
-    return this.httpClient.get<ResponseListDataModel<UserForCustomerModel>>(
-      this.apiUrl + 'getusersforcustomer'
-    );
-  }
 }

@@ -3,10 +3,11 @@ import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { NavigationTabsComponent } from '../navigation-tabs/navigation-tabs.component';
 
 @Component({
   selector: 'app-header',
-  imports: [],
+  imports: [NavigationTabsComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
 })

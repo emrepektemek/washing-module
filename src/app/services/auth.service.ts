@@ -7,8 +7,6 @@ import { RegisterModel } from '../models/registerModel';
 import { IdTokenModel } from '../models/idTokenModel';
 import { jwtDecode } from 'jwt-decode';
 
-import { AdminRegisterModel } from '../models/adminRegisterModel';
-
 @Injectable({
   providedIn: 'root',
 })
@@ -27,13 +25,6 @@ export class AuthService {
   register(registerModel: RegisterModel) {
     return this.httpClient.post<ResponseSingleDataModel<IdTokenModel>>(
       this.apiUrl + 'register',
-      registerModel
-    );
-  }
-
-  adminRegister(registerModel: AdminRegisterModel) {
-    return this.httpClient.post<ResponseSingleDataModel<IdTokenModel>>(
-      this.apiUrl + 'adminregister',
       registerModel
     );
   }

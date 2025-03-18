@@ -1,0 +1,36 @@
+.tabs-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .tabs {
+    position: relative;
+    display: flex;
+    background: rgb(66, 83, 206); 
+    border-radius: 8px;
+    padding: 5px;
+  }
+  
+  .tab {
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    color: rgb(26, 33, 83); 
+  }
+  
+  .tab.active {
+    color: white;
+    font-weight: bold;
+  }
+  
+  .indicator {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 25%;
+    height: 4px;
+    background: white; 
+    transition: transform 0.3s ease;
+  }
+  

@@ -1,14 +1,17 @@
 <main>
-    <div class="container">
-        <header class="d-flex flex-wrap custom-header justify-content-md-between py-3 mb-4">
-          <div class="col-md-3 mb-2 mb-md-0">
-            <app-navigation-tabs></app-navigation-tabs>  
-          </div>
-          <div class="col-md-3 text-end">
-            <button type="button" class="btn btn-primary custom-btn" (click)="logout()">Sign out</button>
-          </div>
-        </header>
-      </div>
+  <header class="d-flex flex-wrap custom-header py-3 mb-4">
+    <div class="col-md-2">
+      <img class="logo-image" src="logo.png" alt="" width="70" height="70">    
+    </div>
+    
+    <div class="col-md-6 d-flex justify-content-center">
+      <app-navigation-tabs></app-navigation-tabs>  
+    </div>
+    
+    <div class="col-md-3 text-end">
+      <button type="button" class="btn btn-primary custom-btn" (click)="logout()">Sign out</button>
+    </div>
+  </header>
 </main>
 
 

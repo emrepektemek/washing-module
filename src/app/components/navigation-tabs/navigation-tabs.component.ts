@@ -9,15 +9,17 @@ import { Component } from '@angular/core';
 })
 export class NavigationTabsComponent {
   tabs = [
-    { label: 'Home' },
-    { label: 'About' },
-    { label: 'Services' },
-    { label: 'Contact' },
+    { label: 'Summary' },
+    { label: 'Washing' },
+    { label: 'Order' },
+    { label: 'Machine' },
+    { label: 'Defect' },
   ];
 
   selectedIndex = 0;
 
   selectTab(index: number) {
     this.selectedIndex = index;
+    console.log(this.selectedIndex);
   }
 }

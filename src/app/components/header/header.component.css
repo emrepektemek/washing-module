@@ -4,10 +4,10 @@
 }
 
 .custom-btn {
-    width: 34%; 
+    width: 25%; 
     background-color: rgb(66, 83, 206); 
     color: white; 
     border: none; 
     border-radius: 5px; 
+    font-size: 13px;
   }
-  

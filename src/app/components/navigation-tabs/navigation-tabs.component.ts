@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navigation-tabs',
@@ -8,8 +9,11 @@ import { Component } from '@angular/core';
   styleUrl: './navigation-tabs.component.css',
 })
 export class NavigationTabsComponent {
+  constructor(private router: Router) {}
+
   tabs = [
     { label: 'Summary' },
+    { label: 'Quality Control' },
     { label: 'Washing' },
     { label: 'Order' },
     { label: 'Machine' },
@@ -20,6 +24,13 @@ export class NavigationTabsComponent {
 
   selectTab(index: number) {
     this.selectedIndex = index;
-    console.log(this.selectedIndex);
+
+    if (index === 3) {
+      this.router.navigate(['/home/order']);
+    }
+
+    if (index === 4) {
+      this.router.navigate(['/home/machine']);
+    }
   }
 }

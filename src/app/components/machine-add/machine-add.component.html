@@ -1,0 +1,40 @@
+<div class="container"> 
+
+    <form [formGroup]="machineForm">
+        <div class="custom-form-container">
+            <div class="form-floating">
+                <input 
+                    formControlName="machineName"
+                    type="text" 
+                    class="form-control custom-input" 
+                    id="floatingInput" 
+                    placeholder="A Washing"
+                >
+                <label for="floatingInput">Machine Name</label>
+            </div>
+        </div>
+    </form>
+    
+
+
+    <div class="custom-dropdown-container">
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle custom-dropdown-btn" type="button" id="genderDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                {{ machineType || "Select Machine" }}
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="genderDropdown">
+                <li><a class="dropdown-item"  (click)="selectMachine('Washing')">Washing</a></li>
+                <li><a class="dropdown-item"  (click)="selectMachine('Drying')">Drying</a></li>
+                <li><a class="dropdown-item" (click)="selectMachine('Squeezing')">Squeezing</a></li>
+                <li><a class="dropdown-item"  (click)="selectMachine('')">Clear Selection</a></li> 
+            </ul>
+        </div>
+    </div>
+
+
+    <div class="custom-btn-container">
+        <button class="btn custom-btn" type="submit" (click)="addMachine()" >Add Machine</button>
+    </div>
+
+</div>
+

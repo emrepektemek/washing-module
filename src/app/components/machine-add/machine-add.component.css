@@ -1,0 +1,99 @@
+/*main container*/
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center;
+    height: 50vh; 
+    margin: 0; 
+    padding: 0;
+}
+
+/* form */
+
+.custom-form-container {
+    display: flex;
+    justify-content: center;  
+    margin-top: 15px; 
+}
+  
+.form-signin {
+    padding: 1rem;
+}
+  
+.form-signin .form-floating:focus-within {
+    z-index: 2;
+
+}
+  
+.form-control {
+    width: 300px;   
+    font-size: 15px; 
+}
+  
+.custom-font {
+    font-family: 'Raleway', sans-serif;
+}
+
+/* input */
+
+  
+.custom-input:focus {
+    outline: none; 
+    box-shadow: 0 0 3px 2px rgb(66, 83, 206); 
+    border-color: rgb(66, 83, 206); 
+}
+
+/* dropdown */
+
+.custom-dropdown-container {
+    display: flex;
+    justify-content: center;  
+    margin-top: 40px;
+}
+
+.custom-dropdown-btn {
+    background-color: rgb(66, 83, 206); 
+    font-size: 15px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.dropdown-item {
+    font-size: 15px;
+    margin-top: 8px;
+    font-family: 'Raleway', sans-serif;
+}
+
+.dropdown-item:active, 
+.dropdown-item:focus {
+    background-color: rgb(66, 83, 206); 
+}
+
+.custom-btn-container {
+    display: flex;
+    justify-content: center;  
+}
+
+/*button*/
+
+.custom-btn-container {
+    display: flex;
+    justify-content: center;  
+}
+  
+  
+.custom-btn {
+    width: 150px;
+    margin-top: 50px;
+    background-color: rgb(66, 83, 206); 
+    color: white; 
+    border: none; 
+    border-radius: 5px; 
+    font-size: 13px;
+    font-family: 'Raleway', sans-serif;
+}
+  

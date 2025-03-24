@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PantState } from '../../store/pant.state';
-import { WashingTypeState } from '../../store/washing-type.state';
 import { PantFabricModel } from '../../models/pantFabricModel';
-import { WashingType } from '../../models/washingType';
 import { take } from 'rxjs';
 import { forkJoin } from 'rxjs';
 import { CommonModule } from '@angular/common';
@@ -20,12 +18,9 @@ import { ToastrService } from 'ngx-toastr';
 export class OrderCreateComponent implements OnInit {
   pants: PantFabricModel[] = [];
   filteredPants: PantFabricModel[] = [];
-  washingTypes: WashingType[] = [];
 
   modelSearch: string = '';
   selectedModelId: number = 0;
-  selectedWashingType: string = '';
-  selectedWashingTypeId: number = 0;
   pantQuantity: number = 0;
 
   dataLoaded: boolean = false;
@@ -33,7 +28,6 @@ export class OrderCreateComponent implements OnInit {
 
   constructor(
     private pantState: PantState,
-    private washingTypeState: WashingTypeState,
     private orderService: OrderService,
     private toastrService: ToastrService
   ) {}
@@ -41,10 +35,8 @@ export class OrderCreateComponent implements OnInit {
   ngOnInit(): void {
     forkJoin({
       pants: this.pantState.pants$.pipe(take(1)),
-      washingTypes: this.washingTypeState.washingTypes$.pipe(take(1)),
-    }).subscribe(({ pants, washingTypes }) => {
+    }).subscribe(({ pants }) => {
       this.pants = pants;
-      this.washingTypes = washingTypes;
       this.dataLoaded = true;
       this.filteredPants = this.pants;
     });
@@ -66,20 +58,9 @@ export class OrderCreateComponent implements OnInit {
     this.filteredPants = [];
   }
 
-  selectWashingType(washingTypeName: string, washingTypeId: number): void {
-    this.selectedWashingType = washingTypeName;
-    this.selectedWashingTypeId = washingTypeId;
-  }
-
-  clearWashingType(): void {
-    this.selectedWashingType = '';
-    this.selectedWashingTypeId = 0;
-  }
-
   createOrder(): void {
     let orderObject = {
       pantId: this.selectedModelId,
-      washingTypeId: this.selectedWashingTypeId,
       pantQuantity: this.pantQuantity,
     };
 
@@ -90,8 +71,6 @@ export class OrderCreateComponent implements OnInit {
         this.toastrService.info(response.message);
         this.modelSearch = '';
         this.selectedModelId = 0;
-        this.selectedWashingType = '';
-        this.selectedWashingTypeId = 0;
         this.pantQuantity = 0;
         this.dataAdd = true;
       },

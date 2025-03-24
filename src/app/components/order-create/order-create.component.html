@@ -30,23 +30,6 @@
     </div>
 
    
-    <div class="custom-dropdown-container">
-        <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle custom-dropdown-btn" type="button" id="washingTypeDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-            {{ selectedWashingType || "Select Washing Type" }}
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="washingTypeDropdown">
-            <li *ngFor="let type of washingTypes">
-                <a class="dropdown-item" (click)="selectWashingType(type.washingTypeName, type.id)">
-                    {{ type.washingTypeName }}
-                </a>
-            </li>
-            <li>
-                <a class="dropdown-item" (click)="clearWashingType()">Clear Selection</a>
-            </li>
-        </ul>
-        </div>
-    </div>
 
     <div class="custom-form-container" style="margin-top: 40px;">
         <div class="form-floating">

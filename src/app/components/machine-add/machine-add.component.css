@@ -5,7 +5,7 @@
     flex-direction: column;
     align-items: center; 
     justify-content: center;
-    height: 50vh; 
+    height: 30vh; 
     margin: 0; 
     padding: 0;
 }
@@ -37,7 +37,6 @@
 }
 
 /* input */
-
   
 .custom-input:focus {
     outline: none; 
@@ -60,12 +59,14 @@
     padding-right: 30px;
     padding-top: 10px;
     padding-bottom: 10px;
+    width: 200px;
 }
 
 .dropdown-item {
     font-size: 15px;
     margin-top: 8px;
     font-family: 'Raleway', sans-serif;
+    width: 200px;
 }
 
 .dropdown-item:active, 
@@ -95,5 +96,13 @@
     border-radius: 5px; 
     font-size: 13px;
     font-family: 'Raleway', sans-serif;
+}
+
+/*Spinner*/
+
+.custom-spinner {
+    border-top-color: rgb(66, 83, 206); 
+    border-right-color: rgb(66, 83, 206); 
+    border-left-color: rgb(66, 83, 206); 
 }
   

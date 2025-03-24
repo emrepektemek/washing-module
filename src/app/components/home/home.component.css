@@ -23,7 +23,7 @@
 
   .custom-btn {
     width: 34%; 
-    background-color: rgb(123, 0, 232); 
+    background-color: rgb(66, 83, 206); 
     color: white; 
     border: none; 
     border-radius: 5px; 
@@ -31,7 +31,7 @@
 
   
 .custom-spinner {
-  border-top-color: rgb(123, 0, 232);
-  border-right-color: rgb(123, 0, 232);
-  border-left-color: rgb(123, 0, 232);
+  border-top-color: rgb(66, 83, 206); 
+  border-right-color: rgb(66, 83, 206); 
+  border-left-color: rgb(66, 83, 206); 
 }

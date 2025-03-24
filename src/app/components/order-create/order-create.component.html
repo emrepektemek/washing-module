@@ -1,5 +1,70 @@
-<div class="container"> 
-    <p>order-create works!</p>
+<div *ngIf="dataAdd == false" class="d-flex justify-content-center align-items-center">
+    <div class="spinner-border custom-spinner" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
 </div>
 
 
+<div class="container">
+
+    <div class="custom-form-container">
+        <div class="form-floating">
+            <input
+                type="text"
+                class="form-control custom-input"
+                id="modelSearch"
+                [(ngModel)]="modelSearch"             
+                (input)="filterModels()"
+            />
+            <ul class="list-group mt-1 custom-dropdown-list" *ngIf="modelSearch && filteredPants.length > 0">
+                <li
+                *ngFor="let model of filteredPants"
+                class="list-group-item list-group-item-action"
+                (click)="selectModel(model)"
+                >
+                {{ model.modelName }}
+                </li>
+            </ul>
+            <label for="floatingInput">Pant Model</label>
+        </div>
+    </div>
+
+   
+    <div class="custom-dropdown-container">
+        <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle custom-dropdown-btn" type="button" id="washingTypeDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+            {{ selectedWashingType || "Select Washing Type" }}
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="washingTypeDropdown">
+            <li *ngFor="let type of washingTypes">
+                <a class="dropdown-item" (click)="selectWashingType(type.washingTypeName, type.id)">
+                    {{ type.washingTypeName }}
+                </a>
+            </li>
+            <li>
+                <a class="dropdown-item" (click)="clearWashingType()">Clear Selection</a>
+            </li>
+        </ul>
+        </div>
+    </div>
+
+    <div class="custom-form-container" style="margin-top: 40px;">
+        <div class="form-floating">
+            <input 
+                [(ngModel)]="pantQuantity"
+                type="number"
+                step="1" 
+                class="form-control custom-input form-control-small"               
+                id="pantQuantity"   
+                placeholder="Pant Quantity"  
+            >
+            <label for="unitPrice">Pant Quantity</label>  
+        </div>
+    </div>
+
+    <div class="custom-btn-container">
+        <button class="btn custom-btn" type="submit" (click)="createOrder()" >Create Order</button>
+    </div>
+    
+</div>
+  

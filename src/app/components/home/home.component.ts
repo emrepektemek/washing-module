@@ -7,7 +7,13 @@ import { RouterModule } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { UserState } from '../../store/user.state';
 import { CommonModule } from '@angular/common';
-import { forkJoin } from 'rxjs';
+import { concatMap, forkJoin } from 'rxjs';
+
+import { PantService } from '../../services/pant.service';
+import { PantState } from '../../store/pant.state';
+
+import { WashingTypeService } from '../../services/washing-type.service';
+import { WashingTypeState } from '../../store/washing-type.state';
 
 @Component({
   selector: 'app-home',
@@ -24,7 +30,11 @@ export class HomeComponent implements OnInit {
     private toastrService: ToastrService,
     private router: Router,
     private userService: UserService,
-    private userSate: UserState
+    private userSate: UserState,
+    private pantService: PantService,
+    private pantState: PantState,
+    private washingTypeService: WashingTypeService,
+    private washingTypeState: WashingTypeState
   ) {}
 
   ngOnInit(): void {
@@ -32,17 +42,29 @@ export class HomeComponent implements OnInit {
   }
 
   loadAllData() {
-    forkJoin({
-      users: this.userService.getUsers(),
-    }).subscribe(({ users }) => {
-      this.userSate.setUsers(users.data);
-      this.dataLoaded = true;
-    });
+    this.userService
+      .getUsers()
+      .pipe(
+        concatMap((users) => {
+          this.userSate.setUsers(users.data);
+          return this.pantService.getPants();
+        }),
+        concatMap((pants) => {
+          this.pantState.setPants(pants.data);
+          return this.washingTypeService.getWashingTypes();
+        })
+      )
+      .subscribe((washingTypes) => {
+        this.washingTypeState.setWashingType(washingTypes.data);
+        this.dataLoaded = true;
+      });
   }
 
   logout() {
     this.authService.logout();
     this.userSate.clearUsers();
+    this.pantState.clearPants();
+    this.washingTypeState.clearWashingType();
     this.router.navigate(['/login']);
     this.toastrService.info('Logged out');
   }

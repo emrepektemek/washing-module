@@ -9,10 +9,11 @@ import {
 } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { MachineService } from '../../services/machine.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-machine-add',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './machine-add.component.html',
   styleUrl: './machine-add.component.css',
 })

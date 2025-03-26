@@ -1,0 +1,45 @@
+<div *ngIf="dataLoaded == false" class="d-flex justify-content-center align-items-center">
+    <div class="spinner-border custom-spinner" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+</div>
+
+<div class="container">
+
+    <input
+        type="text"
+        class="form-control mb-3"
+        placeholder="Sipariş numarası ara..."
+        [(ngModel)]="searchOrder"
+        (input)="filterOrders()"
+    />
+
+  <table *ngIf="dataLoaded && filteredOrders.length > 0" class="table table-striped">
+    <thead class="table-dark">
+      <tr>
+        <th>#</th>
+        <th>Model</th>
+        <th>Sipariş No</th>
+        <th>Adet</th>
+        <th>Oluşturma Tarihi</th>
+        <th>Güncellenme Tarihi</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let order of filteredOrders; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ order.modelName }}</td>
+        <td>{{ order.orderNumber }}</td>
+        <td>{{ order.pantQuantity }}</td>
+        <td>{{ order.createdDate | date:'short' }}</td>
+        <td>{{ order.lastUpdatedDate | date:'short' }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="dataLoaded && filteredOrders.length == 0" class="alert alert-warning">
+    No order data found.
+  </div>
+  
+</div>
+

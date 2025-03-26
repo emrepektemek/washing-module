@@ -14,6 +14,8 @@ import { PantState } from '../../store/pant.state';
 
 import { WashingTypeService } from '../../services/washing-type.service';
 import { WashingTypeState } from '../../store/washing-type.state';
+import { OrderService } from '../../services/order.service';
+import { OrderState } from '../../store/order.state';
 
 @Component({
   selector: 'app-home',
@@ -34,7 +36,9 @@ export class HomeComponent implements OnInit {
     private pantService: PantService,
     private pantState: PantState,
     private washingTypeService: WashingTypeService,
-    private washingTypeState: WashingTypeState
+    private washingTypeState: WashingTypeState,
+    private orderService: OrderService,
+    private orderState: OrderState
   ) {}
 
   ngOnInit(): void {
@@ -52,10 +56,14 @@ export class HomeComponent implements OnInit {
         concatMap((pants) => {
           this.pantState.setPants(pants.data);
           return this.washingTypeService.getWashingTypes();
+        }),
+        concatMap((washingTypes) => {
+          this.washingTypeState.setWashingType(washingTypes.data);
+          return this.orderService.getOrdersWithPants();
         })
       )
-      .subscribe((washingTypes) => {
-        this.washingTypeState.setWashingType(washingTypes.data);
+      .subscribe((orders) => {
+        this.orderState.setOrders(orders.data);
         this.dataLoaded = true;
       });
   }
@@ -65,6 +73,7 @@ export class HomeComponent implements OnInit {
     this.userSate.clearUsers();
     this.pantState.clearPants();
     this.washingTypeState.clearWashingType();
+    this.orderState.clearOrders();
     this.router.navigate(['/login']);
     this.toastrService.info('Logged out');
   }

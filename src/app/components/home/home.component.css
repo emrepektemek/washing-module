@@ -1,35 +1,35 @@
 
 .custom-header{  
-    align-items: center;
-    justify-content: center;
+  align-items: center;
+  justify-content: center;
 }
 
 
-  .main-content {
-    display: flex; 
-    height: 100%; 
-    padding-right: 50px; 
-  }
-  
-  app-sidebar {
-    background-color: lightblue;
-    width: 28%;
-    height: 100%;
-  }
+.main-content {
+  display: flex; 
+  height: 100%; 
+  padding-right: 50px; 
+}
 
-  .home-container{
-    width: 100%;
-  }
+app-sidebar {
+  background-color: lightblue;
+  width: 28%;
+  height: 100%;
+}
 
-  .custom-btn {
-    width: 34%; 
-    background-color: rgb(66, 83, 206); 
-    color: white; 
-    border: none; 
-    border-radius: 5px; 
-  }
+.home-container{
+  width: 100%;
+}
 
-  
+.custom-btn {
+  width: 34%; 
+  background-color: rgb(66, 83, 206); 
+  color: white; 
+  border: none; 
+  border-radius: 5px; 
+}
+
+
 .custom-spinner {
   border-top-color: rgb(66, 83, 206); 
   border-right-color: rgb(66, 83, 206); 

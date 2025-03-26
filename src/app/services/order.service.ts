@@ -2,6 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ResponseModel } from '../models/responseModel';
 import { OrderCreateModel } from '../models/orderCreateModel';
+import { Observable } from 'rxjs';
+import { ResponseListDataModel } from '../models/responseListDataModel';
+import { OrderPantModel } from '../models/orderPantModel';
 
 @Injectable({
   providedIn: 'root',
@@ -15,6 +18,12 @@ export class OrderService {
     return this.httpClient.post<ResponseModel>(
       this.apiUrl + 'add',
       orderCreate
+    );
+  }
+
+  getOrdersWithPants(): Observable<ResponseListDataModel<OrderPantModel>> {
+    return this.httpClient.get<ResponseListDataModel<OrderPantModel>>(
+      this.apiUrl + 'getallwhitpant'
     );
   }
 }

@@ -4,6 +4,7 @@ import { OrderState } from '../../store/order.state';
 import { forkJoin, take } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-order-pant-list',
@@ -19,7 +20,7 @@ export class OrderPantListComponent implements OnInit {
 
   dataLoaded: boolean = false;
 
-  constructor(private orderState: OrderState) {}
+  constructor(private orderState: OrderState, private router: Router) {}
 
   ngOnInit(): void {
     forkJoin({
@@ -33,11 +34,21 @@ export class OrderPantListComponent implements OnInit {
 
   filterOrders(): void {
     if (this.searchOrder) {
-      this.filteredOrders = this.orders.filter((order) =>
-        order.orderNumber.toLowerCase().includes(this.searchOrder.toLowerCase())
+      const searchLower = this.searchOrder.toLowerCase();
+      this.filteredOrders = this.orders.filter(
+        (order) =>
+          order.orderNumber.toLowerCase().includes(searchLower) ||
+          order.modelName.toLowerCase().includes(searchLower)
       );
     } else {
       this.filteredOrders = this.orders;
     }
+  }
+
+  orderSelected(order: OrderPantModel): void {
+    console.log('Order selected', order);
+    this.router.navigate(['/home/washing-process'], {
+      state: { orderId: order.id },
+    });
   }
 }

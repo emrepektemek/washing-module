@@ -6,38 +6,51 @@
 
 <div class="container">
 
+  <div class="search-bar-container">
     <input
-        type="text"
-        class="form-control mb-3"
-        placeholder="Sipariş numarası ara..."
-        [(ngModel)]="searchOrder"
-        (input)="filterOrders()"
+      type="text"
+      class="form-control mb-3"
+      placeholder="Search"
+      [(ngModel)]="searchOrder"
+      (input)="filterOrders()"
     />
+  </div>
+  
+  <div class="table-container">
+    <table *ngIf="dataLoaded && filteredOrders.length > 0" class="table table-striped">
+      <thead class="custom-th">
+        <tr>
+          <th>#</th>
+          <th>Model</th>
+          <th>Order Number</th>
+          <th>Quantity</th>
+          <th>Created Date</th>
+          <th>Wash</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr 
+          *ngFor="let order of filteredOrders; let i = index"
+          class="cursor-pointer hover:bg-light" 
+        >
+          <td>{{ i + 1 }}</td>
+          <td>{{ order.modelName }}</td>
+          <td>{{ order.orderNumber }}</td>
+          <td>{{ order.pantQuantity }}</td>
+          <td>{{ order.createdDate | date:'dd-MM-yyyy HH:mm' }}</td>
+          <td>
+            <button class="wash-button" (click)="orderSelected(order)">     
+              <i class="bi bi-droplet"></i>
+            </button>         
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
-  <table *ngIf="dataLoaded && filteredOrders.length > 0" class="table table-striped">
-    <thead class="table-dark">
-      <tr>
-        <th>#</th>
-        <th>Model</th>
-        <th>Sipariş No</th>
-        <th>Adet</th>
-        <th>Oluşturma Tarihi</th>
-        <th>Güncellenme Tarihi</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let order of filteredOrders; let i = index">
-        <td>{{ i + 1 }}</td>
-        <td>{{ order.modelName }}</td>
-        <td>{{ order.orderNumber }}</td>
-        <td>{{ order.pantQuantity }}</td>
-        <td>{{ order.createdDate | date:'short' }}</td>
-        <td>{{ order.lastUpdatedDate | date:'short' }}</td>
-      </tr>
-    </tbody>
-  </table>
+ 
 
-  <div *ngIf="dataLoaded && filteredOrders.length == 0" class="alert alert-warning">
+  <div *ngIf="dataLoaded && filteredOrders.length == 0" style= "padding: 50px;">
     No order data found.
   </div>
   

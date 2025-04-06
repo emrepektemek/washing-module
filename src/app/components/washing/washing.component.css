@@ -1,8 +1,348 @@
 /*main container*/
 
 .container {
-    display: flex;
-    flex-direction: column;
-    margin: 0; 
-    padding: 0;
+  display: flex;
+  flex-direction: row;
+  width: 100%;       
+  max-width: none;   
+  padding-left: 30px;   
+  padding-right: 30px;  
+  margin-left: 0;    
+  margin-right: 0;   
+  
 }
+
+/*Spinner*/
+
+.custom-spinner {
+  border-top-color: rgb(66, 83, 206); 
+  border-right-color: rgb(66, 83, 206); 
+  border-left-color: rgb(66, 83, 206); 
+}
+
+
+
+/*Washing Type*/
+
+.washing-type-container {
+  flex: 1;
+  padding: 20px;
+  height: 100%;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+  
+.washing-type-header-container {
+  display: flex;
+  align-items: center; 
+  justify-content: center; 
+  position: relative; 
+  width: 100%; 
+  margin-bottom: 15px;
+}
+
+.header-icon {
+  width: 34px;  
+  height: 34px; 
+}
+
+.header-text-container {
+  display: flex;
+  align-items: center; 
+  justify-content: center; 
+  flex: 1; 
+  height: 100%;
+}
+
+.header-p {
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  margin: 0; 
+  color: rgb(59, 74, 185);
+}
+
+.washing-type-list {
+  max-height: 500px; 
+  overflow-y: auto; 
+  padding-right: 10px;
+}
+
+.washing-type-list::-webkit-scrollbar {
+  width: 10px; 
+}
+
+.washing-type-list::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+  border-radius: 10px;
+}
+
+.washing-type-list::-webkit-scrollbar-thumb {
+  background-color: rgb(66, 83, 206) !important; 
+  border-radius: 6px;
+  border: 2px solid #ffffff; 
+}
+
+
+  
+.washing-type-list ul {
+  list-style: none;
+  padding: 0;
+}
+  
+.washing-type-list li {
+  padding: 10px;
+}
+  
+.washing-type-list-title{
+  font-size: 16px;
+  color: #555;
+  margin: 5px 0;
+  margin-bottom: 15px;
+}
+
+.washing-type-list-p {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 15px;
+}
+
+
+
+
+
+/*Washing History*/
+
+
+.washing-history-container {
+  flex: 3;
+  margin-left: 20px;
+  flex-direction: column;
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px; 
+}
+
+.list-group {
+  display: flex;
+  justify-content: space-between; 
+  padding: 0;
+  margin-bottom: 15px;
+}
+  
+.list-group-item {
+  flex: 1; 
+  display: flex;
+  justify-content: center; 
+  align-items: center;    
+  padding: 18px;
+  font-size: 14px;
+}
+
+
+
+.header-item {
+  font-weight: bold;
+  background-color: #f1f1f1; 
+}
+  
+
+
+/*image*/
+
+.image-column {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-column img {
+  max-width: 40px;
+  max-height: 40px;
+  width: 30px;
+  height: 30px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+
+/*button*/
+
+.custom-btn-container {
+  display: flex;
+  justify-content: center;  
+}
+
+.custom-btn {
+  width: 150px;
+  padding: 8px;
+  margin-top: 30px;
+  background-color: rgb(66, 83, 206); 
+  color: white; 
+  border: none; 
+  border-radius: 5px; 
+  font-size: 13px;
+  font-family: 'Raleway', sans-serif;
+}
+
+
+/*modal*/
+
+.modal-content {
+  padding-bottom: 20px; 
+}
+
+.modal-header, .modal-footer {
+  border: none;
+  position: relative; 
+}
+
+.custom-h4{
+  text-align: center;
+  color: black;
+  padding: 12px;
+  font-size: 19px;
+  margin-top: -10px;
+}
+
+.btn-close {
+  position: absolute;
+  top: 20px; 
+  right: 20px;
+}
+
+.modal-body {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  gap: 20px; 
+}
+
+
+.modal-body .form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.modal-body .form-select,
+.modal-body .form-control {
+  width: 100%;
+  margin-bottom: 30px;  
+}
+
+
+.custom-modal-btn {
+  width: 30%; 
+  background-color: rgb(66, 83, 206); 
+  color: white; 
+  border: none; 
+  border-radius: 5px; 
+  font-size: 14px;
+}
+
+.custom-modal-btn:active {
+  background-color: white;
+  color: black;
+}
+
+/*select washing type*/
+
+.custom-dropdown-container {
+  display: flex;
+  justify-content: center;  
+  margin-top: 40px;
+}
+
+.custom-dropdown-btn {
+  background-color: rgb(66, 83, 206);
+  font-size: 14px;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 220px;
+}
+
+.custom-dropdown-list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 10;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  font-family: 'Raleway', sans-serif;
+  font-size: 15px;
+  transition: all 0.2s ease;
+}
+
+
+.custom-dropdown-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+
+.custom-dropdown-list::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+  border-radius: 4px;
+}
+
+
+.custom-dropdown-list::-webkit-scrollbar-thumb {
+  background-color: rgb(66, 83, 206);
+  border-radius: 4px;
+}
+
+
+.custom-dropdown-list::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(66, 83, 206);
+}
+
+
+.custom-dropdown-list li:hover {
+  background-color: #f0f0f0;
+}
+
+
+.custom-small-dropdown-list {
+  top: 100%;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  font-family: 'Raleway', sans-serif;
+  font-size: 15px;
+  transition: all 0.2s ease;
+}
+
+
+
+.dropdown-item {
+  font-size: 14px;
+  font-family: 'Raleway', sans-serif;
+  width: 200px;
+  margin-bottom: 4px;
+}
+
+
+.dropdown-item:active,
+.dropdown-item:focus {
+  background-color: rgb(66, 83, 206);
+}
+
+

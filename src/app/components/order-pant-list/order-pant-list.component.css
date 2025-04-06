@@ -17,10 +17,11 @@
 
 
 .search-bar-container input:focus {
-    border-color: black;
-    border-width: 2px; 
-    box-shadow: 0 0 6px black;
-  }
+    outline: none; 
+    box-shadow: 0 0 3px 1px rgb(66, 83, 206); 
+    border-color: rgb(66, 83, 206); 
+}
+
 
 
 /*table*/
@@ -40,7 +41,7 @@ table {
   
 
 tr th {
-    background-color: black;
+    background-color: rgb(66, 83, 206); 
     color: white; 
     padding: 10px; 
 }
@@ -67,8 +68,8 @@ tbody tr:hover {
     background-color: #007bff;
     color: white;
     border: none;
-    padding: 5px 10px;
-    font-size: 16px;
+    padding: 4px 8px;
+    font-size: 10px;
     border-radius: 50px;
     cursor: pointer;
     position: relative;
@@ -77,7 +78,7 @@ tbody tr:hover {
 }
   
 .wash-button:hover {
-    background-color: #0056b3;
+    background-color: #117ff5;
     transform: scale(1.05);
 }
   

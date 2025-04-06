@@ -46,7 +46,6 @@ export class OrderPantListComponent implements OnInit {
   }
 
   orderSelected(order: OrderPantModel): void {
-    console.log('Order selected', order);
     this.router.navigate(['/home/washing-process'], {
       state: { orderId: order.id },
     });

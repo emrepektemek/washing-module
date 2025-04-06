@@ -44,7 +44,7 @@
 
 .custom-input:focus {
   outline: none; 
-  box-shadow: 0 0 3px 2px rgb(66, 83, 206); 
+  box-shadow: 0 0 3px 1px rgb(66, 83, 206); 
   border-color: rgb(66, 83, 206); 
 }
 

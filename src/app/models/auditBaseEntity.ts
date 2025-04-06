@@ -1,9 +1,9 @@
 export abstract class AuditBaseEntity {
   id: number = 0;
   createdUserId: number = 0;
-  createdDate: Date = new Date();
+  createdDate: string = '';
   lastUpdatedUserId: number;
-  lastUpdatedDate: Date;
+  lastUpdatedDate: string = '';
   status: boolean = true;
   isDeleted: boolean = false;
 }

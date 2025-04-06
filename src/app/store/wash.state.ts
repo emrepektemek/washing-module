@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { Wash } from '../models/wash';
+import { WashList } from '../models/washListModel';
 
 @Injectable({
   providedIn: 'root',
 })
 export class WashState {
-  private washes = new BehaviorSubject<Wash[]>([]);
+  private washes = new BehaviorSubject<WashList[]>([]);
 
   washes$ = this.washes.asObservable();
 
-  setWashes(reports: Wash[]) {
+  setWashes(reports: WashList[]) {
     this.washes.next(reports);
   }
 

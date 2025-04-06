@@ -1,4 +1,151 @@
-<div class="container"> 
-    <p>washing works!</p>
-</div>    
+<div *ngIf="dataLoaded == false || dataAdd == false" class="d-flex justify-content-center align-items-center">
+  <div class="spinner-border custom-spinner" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
+
+<div class="container no-padding"> 
+ 
+  <div class="washing-type-container" *ngIf="dataLoaded && washes.length != 0">
+
+    <div class="washing-type-header-container">
+      <img src="assets/images/info.png" alt="Washing Icon" class="header-icon">
+      <div class="header-text-container">
+        <p class="header-p">Washing Types Info</p>
+      </div>
+    </div>
+
+    <div class="washing-type-list">
+      <ul>      
+        <li *ngFor="let washingType of washingTypes">
+          <p class="washing-type-list-title">{{ washingType.washingTypeName }}</p>
+          <p class="washing-type-list-p">{{ washingType.description }}</p>
+        </li>  
+      </ul>
+    </div>
+
+  </div>
+
+
+  <div class="washing-history-container" *ngIf="dataLoaded && washes.length != 0" >
+
+    <ul class="list-group list-group-horizontal">
+      <li class="list-group-item image-column">
+        <img src="assets/images/order.png" class="img-fluid" alt="Pant">
+      </li>
+      <li class="list-group-item image-column">
+        <img src="assets/images/pant.png" class="img-fluid" alt="Pant">
+      </li>
+      <li class="list-group-item image-column">
+        <img src="assets/images/washing-machine.png" class="img-fluid" alt="Pant">
+      </li>
+
+      <li class="list-group-item image-column">
+        <img src="assets/images/washing-time.png" style="width: 32px; height: 32px;" class="img-fluid" alt="Pant">
+      </li>
+
+      <li class="list-group-item image-column">
+        <img src="assets/images/washing-start.png" style="width: 27px; height: 27px; margin-top: 2px;" class="img-fluid" alt="Pant">
+      </li>
+
+      <li class="list-group-item image-column">
+        <img src="assets/images/loading.png" style="width: 27px; height: 27px; margin-top: 2px;" class="img-fluid" alt="Pant">
+      </li>
+    </ul>
+
+    <div *ngFor="let wash of washes" > 
+
+      <ul class="list-group list-group-horizontal">
+        <li class="list-group-item">{{ wash.orderNumber }}</li>
+        <li class="list-group-item">{{ wash.modelName }}</li>    
+        <li class="list-group-item">{{ wash.washingTypeName }}</li>
+        <li class="list-group-item">{{ wash.washingTime }} Min</li>
+        <li class="list-group-item">
+          {{ wash.createdDate | date:'dd-MM-yyyy HH:mm' }}
+        </li>
+        <li class="list-group-item">  
+          <p *ngIf="isWashInProgress(wash.createdDate, wash.washingTime)" style="margin: 0px;">Completed</p>
+          <p *ngIf="!isWashInProgress(wash.createdDate, wash.washingTime)" style="margin: 0px;">In Progress</p>
+        </li>
+      </ul>
+
+    </div>
+
+    <div class="custom-btn-container">
+      <button class="btn custom-btn" type="submit" (click)="openWashStartModal()" >Start New Wash</button>
+    </div>
+
+  </div>
+
+</div>  
+
+
+<div class="modal fade" id="washStartModal" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h4 class="custom-h4" >Select washing options</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      
+      <div class="modal-body">
+
+        <div class="form-container">              
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle custom-dropdown-btn" type="button" id="washingTypeDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                {{ selectedWashingType || "Select Washing Type" }}
+            </button>
+            <ul class="dropdown-menu custom-dropdown-list" aria-labelledby="washingTypeDropdown">
+                <li *ngFor="let type of washingTypes">
+                    <a class="dropdown-item" (click)="selectWashingType(type.washingTypeName, type.id)">
+                        {{ type.washingTypeName }}
+                    </a>
+                </li>
+                <li>
+                    <a class="dropdown-item" (click)="clearWashingType()">Clear Selection</a>
+                </li>
+            </ul>
+          </div>
+        </div>  
+        
+        <div class="form-container">
+          <div class="dropdown">
+              <button class="btn btn-secondary dropdown-toggle custom-dropdown-btn" type="button" id="shiftDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                  {{ selectedShift || "Select Washing Shift"  }}
+              </button>
+              <ul class="dropdown-menu custom-small-dropdown-list" aria-labelledby="shiftDropdown">
+                  <li><a class="dropdown-item"  (click)="selectShift('1st shift')">1st shift</a></li>
+                  <li><a class="dropdown-item"  (click)="selectShift('2nd shift')">2nd shift</a></li>
+                  <li><a class="dropdown-item" (click)="selectShift('3rd shift')">3rd shift</a></li>          
+                  <li><a class="dropdown-item"  (click)="selectShift('')">Clear Selection</a></li> 
+              </ul>
+          </div>
+      </div>
+
+      </div>
+
+      <div class="modal-footer">
+
+        <div class="d-flex justify-content-evenly gap-4" style="width: 100%;">
+          <button type="button" class="btn btn-primary custom-modal-btn" (click)="startWashing()" >Start</button>
+          <button type="button" data-bs-dismiss="modal" class="btn btn-primary custom-modal-btn" >Close</button>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>
+
+
+<div *ngIf="dataLoaded && washes.length == 0" style= "padding: 30px; text-align: center;">
+  No wash data found
+</div>
+
+<div class="custom-btn-container" *ngIf="dataLoaded && washes.length == 0">
+  <button class="btn custom-btn" type="submit" (click)="openWashStartModal()" >Start New Wash</button>
+</div>
+
+
 

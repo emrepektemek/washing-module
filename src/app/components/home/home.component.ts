@@ -4,8 +4,6 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { HeaderComponent } from '../header/header.component';
 import { RouterModule } from '@angular/router';
-import { UserService } from '../../services/user.service';
-import { UserState } from '../../store/user.state';
 import { CommonModule } from '@angular/common';
 import { concatMap, forkJoin } from 'rxjs';
 
@@ -16,6 +14,8 @@ import { WashingTypeService } from '../../services/washing-type.service';
 import { WashingTypeState } from '../../store/washing-type.state';
 import { OrderService } from '../../services/order.service';
 import { OrderState } from '../../store/order.state';
+import { WashService } from '../../services/wash.service';
+import { WashState } from '../../store/wash.state';
 
 @Component({
   selector: 'app-home',
@@ -31,14 +31,14 @@ export class HomeComponent implements OnInit {
     private authService: AuthService,
     private toastrService: ToastrService,
     private router: Router,
-    private userService: UserService,
-    private userSate: UserState,
     private pantService: PantService,
     private pantState: PantState,
     private washingTypeService: WashingTypeService,
     private washingTypeState: WashingTypeState,
     private orderService: OrderService,
-    private orderState: OrderState
+    private orderState: OrderState,
+    private washService: WashService,
+    private washState: WashState
   ) {}
 
   ngOnInit(): void {
@@ -46,13 +46,9 @@ export class HomeComponent implements OnInit {
   }
 
   loadAllData() {
-    this.userService
-      .getUsers()
+    this.pantService
+      .getPants()
       .pipe(
-        concatMap((users) => {
-          this.userSate.setUsers(users.data);
-          return this.pantService.getPants();
-        }),
         concatMap((pants) => {
           this.pantState.setPants(pants.data);
           return this.washingTypeService.getWashingTypes();
@@ -60,17 +56,20 @@ export class HomeComponent implements OnInit {
         concatMap((washingTypes) => {
           this.washingTypeState.setWashingType(washingTypes.data);
           return this.orderService.getOrdersWithPants();
+        }),
+        concatMap((orders) => {
+          this.orderState.setOrders(orders.data);
+          return this.washService.getAllForWashing();
         })
       )
-      .subscribe((orders) => {
-        this.orderState.setOrders(orders.data);
+      .subscribe((washes) => {
+        this.washState.setWashes(washes.data);
         this.dataLoaded = true;
       });
   }
 
   logout() {
     this.authService.logout();
-    this.userSate.clearUsers();
     this.pantState.clearPants();
     this.washingTypeState.clearWashingType();
     this.orderState.clearOrders();

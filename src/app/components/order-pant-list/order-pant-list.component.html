@@ -20,9 +20,9 @@
     <table *ngIf="dataLoaded && filteredOrders.length > 0" class="table table-striped">
       <thead class="custom-th">
         <tr>
-          <th>#</th>
-          <th>Model</th>
+          <th></th>
           <th>Order Number</th>
+          <th>Model</th>    
           <th>Quantity</th>
           <th>Created Date</th>
           <th>Wash</th>
@@ -34,8 +34,8 @@
           class="cursor-pointer hover:bg-light" 
         >
           <td>{{ i + 1 }}</td>
-          <td>{{ order.modelName }}</td>
           <td>{{ order.orderNumber }}</td>
+          <td>{{ order.modelName }}</td>   
           <td>{{ order.pantQuantity }}</td>
           <td>{{ order.createdDate | date:'dd-MM-yyyy HH:mm' }}</td>
           <td>
@@ -51,7 +51,7 @@
  
 
   <div *ngIf="dataLoaded && filteredOrders.length == 0" style= "padding: 50px;">
-    No order data found.
+    No order data found
   </div>
   
 </div>

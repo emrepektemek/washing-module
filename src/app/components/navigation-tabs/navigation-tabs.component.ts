@@ -12,7 +12,6 @@ export class NavigationTabsComponent {
   constructor(private router: Router) {}
 
   tabs = [
-    { label: 'Summary' },
     { label: 'Quality Control' },
     { label: 'Washing' },
     { label: 'Order' },
@@ -25,16 +24,19 @@ export class NavigationTabsComponent {
   selectTab(index: number) {
     this.selectedIndex = index;
 
-    if (index === 2) {
+    if (index === 1) {
       this.router.navigate(['/home/washing']);
     }
 
-    if (index === 3) {
+    if (index === 2) {
       this.router.navigate(['/home/order']);
     }
 
-    if (index === 4) {
+    if (index === 3) {
       this.router.navigate(['/home/machine']);
+    }
+    if (index === 4) {
+      this.router.navigate(['/home/defect']);
     }
   }
 }

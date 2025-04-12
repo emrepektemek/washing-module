@@ -14,8 +14,8 @@ declare var bootstrap: any;
 @Component({
   selector: 'app-washing',
   imports: [CommonModule],
-  templateUrl: './washing.component.html',
-  styleUrl: './washing.component.css',
+  templateUrl: './washing-process.component.html',
+  styleUrl: './washing-process.component.css',
 })
 export class WashingComponent implements OnInit {
   washes: WashList[] = [];

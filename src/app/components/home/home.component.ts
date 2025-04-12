@@ -16,6 +16,10 @@ import { OrderService } from '../../services/order.service';
 import { OrderState } from '../../store/order.state';
 import { WashService } from '../../services/wash.service';
 import { WashState } from '../../store/wash.state';
+import { DefectService } from '../../services/defect.service';
+import { DefectState } from '../../store/defect.state';
+import { OrderDefectService } from '../../services/order-defect.service';
+import { OrderDefectState } from '../../store/order-defect.state';
 
 @Component({
   selector: 'app-home',
@@ -38,7 +42,11 @@ export class HomeComponent implements OnInit {
     private orderService: OrderService,
     private orderState: OrderState,
     private washService: WashService,
-    private washState: WashState
+    private washState: WashState,
+    private defectService: DefectService,
+    private defectState: DefectState,
+    private orderDefectService: OrderDefectService,
+    private orderDefectState: OrderDefectState
   ) {}
 
   ngOnInit(): void {
@@ -60,10 +68,18 @@ export class HomeComponent implements OnInit {
         concatMap((orders) => {
           this.orderState.setOrders(orders.data);
           return this.washService.getAllForWashing();
+        }),
+        concatMap((washes) => {
+          this.washState.setWashes(washes.data);
+          return this.defectService.getDefects();
+        }),
+        concatMap((defects) => {
+          this.defectState.setDefects(defects.data);
+          return this.orderDefectService.getOrderDefects();
         })
       )
-      .subscribe((washes) => {
-        this.washState.setWashes(washes.data);
+      .subscribe((orderDefects) => {
+        this.orderDefectState.setOrderDefect(orderDefects.data);
         this.dataLoaded = true;
       });
   }
@@ -73,6 +89,9 @@ export class HomeComponent implements OnInit {
     this.pantState.clearPants();
     this.washingTypeState.clearWashingType();
     this.orderState.clearOrders();
+    this.washState.clearWashes();
+    this.defectState.clearDefects();
+    this.orderDefectState.clearOrderDefect();
     this.router.navigate(['/login']);
     this.toastrService.info('Logged out');
   }

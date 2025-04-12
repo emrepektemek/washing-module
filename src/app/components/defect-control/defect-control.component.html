@@ -1,0 +1,109 @@
+<div *ngIf="dataLoaded == false" class="d-flex justify-content-center align-items-center">
+    <div class="spinner-border custom-spinner" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+</div>
+
+
+
+<div class="container no-padding"> 
+
+  <div class="defect-container">
+   
+    <div class="defect-header-container">
+      <p>Defects</p>
+    </div>  
+
+    <div class="defect-item-container">
+        <div 
+          class="defect-item"
+          *ngFor="let defect of defects"
+          (click)="showMessage(defect.description)"
+          [ngClass]="{
+            'red-box': defect.defectCategoryId === 1,
+            'orange-box': defect.defectCategoryId === 2,
+            'yellow-box': defect.defectCategoryId === 3
+          }"
+        >
+        {{ defect.defectName }}
+      </div>
+    </div>
+
+  </div>
+   
+
+
+  <div class="order-defect-container">
+
+    <div class="order-defect-header-container">
+      <p>{{this.orderDefects[0].orderNumber}}</p>
+      <p>{{this.orderDefects[0].pantQuantity}} Pants</p>
+      <p>{{this.orderDefects[0].orderCreatedDate | date:'dd-MM-yyyy HH:mm'}}</p>
+    </div>
+
+    <div class="order-defect-item-container scrollable" *ngIf="dataLoaded && orderDefects.length != 0" >
+
+      <ul class="list-group list-group-horizontal">
+        <li class="list-group-item image-column">
+          <img src="assets/images/order.png" class="img-fluid" alt="Pant">
+        </li>
+        <li class="list-group-item image-column">
+          <img src="assets/images/pant.png" class="img-fluid" alt="Pant">
+        </li>
+        <li class="list-group-item image-column">
+          <img src="assets/images/washing-machine.png" class="img-fluid" alt="Pant">
+        </li>
+  
+        <li class="list-group-item image-column">
+          <img src="assets/images/washing-time.png" style="width: 32px; height: 32px;" class="img-fluid" alt="Pant">
+        </li>
+  
+        <li class="list-group-item image-column">
+          <img src="assets/images/washing-start.png" style="width: 27px; height: 27px; margin-top: 2px;" class="img-fluid" alt="Pant">
+        </li>
+  
+        <li class="list-group-item image-column">
+          <img src="assets/images/loading.png" style="width: 27px; height: 27px; margin-top: 2px;" class="img-fluid" alt="Pant">
+        </li>
+      </ul>
+  
+      <div *ngIf="dataLoaded">
+        <div *ngFor="let defect of displayedDefects; let i = index">
+          <ul class="list-group list-group-horizontal">
+            <li class="list-group-item">Pantolon No: {{ i + 1 }}</li>
+      
+            <li class="list-group-item">
+              {{ defect?.rowNumber }}
+            </li>
+      
+            <li class="list-group-item">
+              {{ defect?.defectName }}
+            </li>
+      
+            <li class="list-group-item">
+              {{ defect?.decision || 'Bekliyor / Pending' }}
+            </li>
+      
+            <li class="list-group-item">
+              {{ defect?.createdDate || 'Bekliyor / Pending'}}
+            </li>
+      
+            <li class="list-group-item" *ngIf="defect; else pendingDate">
+              {{ defect.createdDate | date:'dd-MM-yyyy HH:mm' }}
+            </li>
+            
+            <ng-template #pendingDate>
+              <li class="list-group-item">---</li>
+            </ng-template>
+      
+          </ul>
+        </div>
+      </div>
+
+    </div>
+   
+  </div>
+ 
+</div>
+
+

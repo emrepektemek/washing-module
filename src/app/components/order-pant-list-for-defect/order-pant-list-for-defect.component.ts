@@ -9,10 +9,10 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-order-pant-list',
   imports: [CommonModule, FormsModule],
-  templateUrl: './order-pant-list.component.html',
-  styleUrl: './order-pant-list.component.css',
+  templateUrl: './order-pant-list-for-defect.component.html',
+  styleUrl: './order-pant-list-for-defect.component.css',
 })
-export class OrderPantListComponent implements OnInit {
+export class OrderPantListForDefectComponent implements OnInit {
   orders: OrderPantModel[] = [];
   filteredOrders: OrderPantModel[] = [];
 
@@ -46,8 +46,8 @@ export class OrderPantListComponent implements OnInit {
   }
 
   orderSelected(order: OrderPantModel): void {
-    this.router.navigate(['/home/washing-process'], {
-      state: { orderId: order.id },
+    this.router.navigate(['/home/defect-control'], {
+      state: { selectedOrder: order },
     });
   }
 }

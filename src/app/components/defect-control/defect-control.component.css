@@ -1,0 +1,207 @@
+
+/*main container*/
+
+.container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;   
+  height: 100;    
+  max-width: none;   
+  padding-left: 30px;   
+  padding-right: 30px;  
+  margin-left: 0;    
+  margin-right: 0;   
+  gap: 30px;
+}
+
+
+
+/*Spinner*/
+
+.custom-spinner {
+  border-top-color: rgb(66, 83, 206); 
+  border-right-color: rgb(66, 83, 206); 
+  border-left-color: rgb(66, 83, 206); 
+}
+
+/* Toaster */
+
+.toast-container.toast-bottom-left .toast {
+  width: 500px;
+}
+
+/*Defect Info*/
+
+.defect-container {
+  width: 43%; 
+  flex-direction: column;
+  grid-template-columns: repeat(4, 1fr);
+  height: 100%;
+}
+
+
+.defect-header-container {
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  background-color:rgb(66, 83, 206);
+  border-radius: 10px;
+  margin-bottom: 20px;
+  padding: 3px;
+}
+
+.defect-header-container p {
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  margin: 0; 
+  padding: 5px; 
+}
+
+
+.defect-item-container {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  min-height: 500px;
+  align-items: center;
+  justify-content: center;
+}
+
+.defect-item {
+  border-radius: 15px;
+  padding: 20px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 12px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  transition: transform 0.2s, background-color 0.3s;
+  cursor: pointer;
+  animation: fadeInUp 0.5s ease-out forwards;
+  height: 80px;
+}
+
+.red-box {
+  background-color: rgba(216, 0, 0, 0.756)
+}
+.orange-box {
+  background-color: rgba(235, 102, 0, 0.878)
+}
+.yellow-box {
+  background-color: rgba(235, 224, 0, 0.878)
+}
+.green-box {
+  background-color: rgba(0, 211, 28, 0.878)
+}
+
+.defect-item:hover {
+  transform: scale(1.07);
+}
+
+
+
+/*Order Defect*/
+
+.order-defect-container {
+  width: 75%; 
+  flex-direction: row;
+}
+
+.order-defect-header-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center; 
+  background-color:rgb(66, 83, 206);
+  border-radius: 10px;
+  margin-bottom: 20px;
+  padding: 3px;
+}
+
+.order-defect-header-container p {
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  margin: 0; 
+  padding: 5px; 
+ 
+}
+
+.order-defect-item-container {
+  flex-direction: column;
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px; 
+}
+
+.scrollable {
+  max-height: 500px;
+  overflow-y: auto;
+  padding-right: 8px; 
+}
+
+
+.scrollable::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scrollable::-webkit-scrollbar-track {
+  background: #f0f0f0;
+  border-radius: 4px;
+}
+
+.scrollable::-webkit-scrollbar-thumb {
+  background-color: rgb(66, 83, 206);
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.scrollable::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(66, 83, 206);
+}
+
+.list-group {
+  display: flex;
+  justify-content: space-between; 
+  padding: 0;
+  margin-bottom: 15px;
+}
+  
+.list-group-item {
+  flex: 1; 
+  display: flex;
+  justify-content: center; 
+  align-items: center;    
+  padding: 18px;
+  font-size: 14px;
+}
+
+.header-item {
+  font-weight: bold;
+  background-color: #f1f1f1; 
+}
+
+
+/*image*/
+
+.image-column {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-column img {
+  max-width: 40px;
+  max-height: 40px;
+  width: 30px;
+  height: 30px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+

@@ -5,8 +5,10 @@ import { HomeComponent } from './components/home/home.component';
 import { AuthGuard } from './guards/auth.guard';
 import { MachineAddComponent } from './components/machine-add/machine-add.component';
 import { OrderCreateComponent } from './components/order-create/order-create.component';
-import { WashingComponent } from './components/washing/washing.component';
-import { OrderPantListComponent } from './components/order-pant-list/order-pant-list.component';
+import { WashingComponent } from './components/washing-process/washing-process.component';
+import { OrderPantListForWashingComponent } from './components/order-pant-list-for-washing/order-pant-list-for-washing.component';
+import { OrderPantListForDefectComponent } from './components/order-pant-list-for-defect/order-pant-list-for-defect.component';
+import { DefectControlComponent } from './components/defect-control/defect-control.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -17,10 +19,12 @@ export const routes: Routes = [
     component: HomeComponent,
     canActivate: [AuthGuard],
     children: [
-      { path: 'washing', component: OrderPantListComponent },
+      { path: 'washing', component: OrderPantListForWashingComponent },
       { path: 'washing-process', component: WashingComponent },
       { path: 'order', component: OrderCreateComponent },
       { path: 'machine', component: MachineAddComponent },
+      { path: 'defect', component: OrderPantListForDefectComponent },
+      { path: 'defect-control', component: DefectControlComponent },
     ],
   },
 ];

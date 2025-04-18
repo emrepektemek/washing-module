@@ -62,6 +62,13 @@
   color: rgb(59, 74, 185);
 }
 
+.washing-type-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px; 
+}
+
 .washing-type-list {
   max-height: 470px; 
   overflow-y: auto; 
@@ -105,10 +112,17 @@
   margin-bottom: 15px;
 }
 
-
+.washing-time-badge {
+  background-color: rgb(66, 83, 206);
+  color: white;
+  padding: 4px 10px;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
 
 /*Washing History*/
-
 
 .washing-history-container {
   flex: 3;
@@ -133,7 +147,7 @@
   display: flex;
   justify-content: center; 
   align-items: center;    
-  padding: 18px;
+  padding: 16px;
   font-size: 14px;
 }
 

@@ -51,6 +51,7 @@ tr td {
     background-color: white;
     color: black;
     padding: 10px; 
+    
 }
 
 th:not(:first-child):last-child,
@@ -58,7 +59,6 @@ td:not(:first-child):last-child {
   min-width: 100px;
   text-align: center;
 }
-  
 
 tbody tr {
     transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
@@ -69,10 +69,11 @@ tbody tr:hover {
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15); 
 }
 
+
 /*button*/
 
-.wash-button {
-    background-color: #007bff;
+.control-button {
+    background-color: rgb(66, 83, 206); 
     color: white;
     border: none;
     padding: 4px 8px;
@@ -84,15 +85,15 @@ tbody tr:hover {
     transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
 }
   
-.wash-button:hover {
-    background-color: #117ff5;
+.control-button:hover {
+    background-color: rgb(66, 83, 206); 
     transform: scale(1.05);
 }
   
-.wash-button:active {
+.control-button:active {
     transform: scale(0.95);
 }
 
-.wash-button i {
+.control-button i {
     font-size: 15px;
 }

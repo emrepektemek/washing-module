@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { WashList } from '../../models/washListModel';
 import { CommonModule } from '@angular/common';
 import { forkJoin, map, take } from 'rxjs';
@@ -8,6 +8,8 @@ import { WashingTypeState } from '../../store/washing-type.state';
 import { WashCreateModel } from '../../models/washCreateModel';
 import { WashService } from '../../services/wash.service';
 import { ToastrService } from 'ngx-toastr';
+import { Machine } from '../../models/machine';
+import { MachineState } from '../../store/machine.state';
 
 declare var bootstrap: any;
 
@@ -17,13 +19,17 @@ declare var bootstrap: any;
   templateUrl: './washing-process.component.html',
   styleUrl: './washing-process.component.css',
 })
-export class WashingComponent implements OnInit {
+export class WashingComponent implements OnInit, AfterViewInit {
   washes: WashList[] = [];
   washingTypes: WashingType[] = [];
+  machines: Machine[] = [];
 
   orderId: number;
   selectedWashingType: string = '';
   selectedWashingTypeId: number = 0;
+  selectedMachineName: string = '';
+  selectedMachineId: number = 0;
+
   selectedShift: string = '';
 
   washStartModal: any;
@@ -34,6 +40,7 @@ export class WashingComponent implements OnInit {
   constructor(
     private washState: WashState,
     private washingTypeState: WashingTypeState,
+    private machineState: MachineState,
     private washService: WashService,
     private toastrService: ToastrService
   ) {}
@@ -47,15 +54,22 @@ export class WashingComponent implements OnInit {
         map((washes) => washes.filter((wash) => wash.orderId === this.orderId))
       ),
       washingTypes: this.washingTypeState.washingTypes$.pipe(take(1)),
-    }).subscribe(({ washes, washingTypes }) => {
+      machines: this.machineState.machines$.pipe(take(1)),
+    }).subscribe(({ washes, washingTypes, machines }) => {
       this.washes = washes;
       this.washingTypes = washingTypes;
+      this.machines = machines;
+      console.log(washes);
       this.dataLoaded = true;
     });
 
     this.washStartModal = new bootstrap.Modal(
       document.getElementById('washStartModal')!
     );
+  }
+
+  ngAfterViewInit(): void {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   openWashStartModal() {
@@ -77,6 +91,16 @@ export class WashingComponent implements OnInit {
     this.selectedShift = shift;
   }
 
+  selectMachine(machine: Machine): void {
+    this.selectedMachineName = machine.machineName;
+    this.selectedMachineId = machine.id;
+  }
+
+  clearMachine(): void {
+    this.selectedMachineName = '';
+    this.selectedMachineId = 0;
+  }
+
   isWashInProgress(createdDate: string, washingTime: number): boolean {
     const createdDateObj = new Date(createdDate);
     const washingTimeMs = washingTime * 60 * 1000;
@@ -90,8 +114,11 @@ export class WashingComponent implements OnInit {
     let washObject: WashCreateModel = {
       orderId: this.orderId,
       washingTypeId: this.selectedWashingTypeId,
+      machineId: this.selectedMachineId,
       shift: this.selectedShift,
     };
+
+    console.log(washObject);
 
     this.dataAdd = false;
 

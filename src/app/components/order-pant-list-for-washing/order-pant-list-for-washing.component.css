@@ -53,6 +53,13 @@ tr td {
     padding: 10px; 
 }
 
+th:not(:first-child):last-child,
+td:not(:first-child):last-child {
+  min-width: 100px;
+  text-align: center;
+}
+  
+
 tbody tr {
     transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
 }

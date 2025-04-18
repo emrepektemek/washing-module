@@ -5,7 +5,6 @@
 </div>
 
 
-
 <div class="container no-padding"> 
 
   <div class="defect-container">
@@ -22,7 +21,8 @@
           [ngClass]="{
             'red-box': defect.defectCategoryId === 1,
             'orange-box': defect.defectCategoryId === 2,
-            'yellow-box': defect.defectCategoryId === 3
+            'yellow-box': defect.defectCategoryId === 3,
+            'green-box': defect.defectCategoryId === 4
           }"
         >
         {{ defect.defectName }}
@@ -36,66 +36,66 @@
   <div class="order-defect-container">
 
     <div class="order-defect-header-container">
-      <p>{{this.orderDefects[0].orderNumber}}</p>
-      <p>{{this.orderDefects[0].pantQuantity}} Pants</p>
-      <p>{{this.orderDefects[0].orderCreatedDate | date:'dd-MM-yyyy HH:mm'}}</p>
+      <p>{{this.selectedOrder.orderNumber}}</p>
+      <p>{{this.selectedOrder.pantQuantity}} Pants</p>
+      <p>{{this.selectedOrder.createdDate| date:'dd-MM-yyyy HH:mm'}}</p>
     </div>
 
-    <div class="order-defect-item-container scrollable" *ngIf="dataLoaded && orderDefects.length != 0" >
+    <div class="order-defect-item-container scrollable" *ngIf="dataLoaded" >
 
       <ul class="list-group list-group-horizontal">
         <li class="list-group-item image-column">
-          <img src="assets/images/order.png" class="img-fluid" alt="Pant">
+          <p>Row</p>
         </li>
         <li class="list-group-item image-column">
-          <img src="assets/images/pant.png" class="img-fluid" alt="Pant">
+          <p>Defect</p>
         </li>
         <li class="list-group-item image-column">
-          <img src="assets/images/washing-machine.png" class="img-fluid" alt="Pant">
-        </li>
-  
-        <li class="list-group-item image-column">
-          <img src="assets/images/washing-time.png" style="width: 32px; height: 32px;" class="img-fluid" alt="Pant">
+          <p>Created</p>
         </li>
   
         <li class="list-group-item image-column">
-          <img src="assets/images/washing-start.png" style="width: 27px; height: 27px; margin-top: 2px;" class="img-fluid" alt="Pant">
+          <p>Last Updated</p>
         </li>
   
         <li class="list-group-item image-column">
-          <img src="assets/images/loading.png" style="width: 27px; height: 27px; margin-top: 2px;" class="img-fluid" alt="Pant">
+          <p>Result</p>
+        </li>
+  
+        <li class="list-group-item image-column">
+          <p>Decision</p>
         </li>
       </ul>
   
       <div *ngIf="dataLoaded">
         <div *ngFor="let defect of displayedDefects; let i = index">
           <ul class="list-group list-group-horizontal">
-            <li class="list-group-item">Pantolon No: {{ i + 1 }}</li>
-      
-            <li class="list-group-item">
-              {{ defect?.rowNumber }}
-            </li>
-      
-            <li class="list-group-item">
-              {{ defect?.defectName }}
-            </li>
-      
-            <li class="list-group-item">
-              {{ defect?.decision || 'Bekliyor / Pending' }}
-            </li>
-      
-            <li class="list-group-item">
-              {{ defect?.createdDate || 'Bekliyor / Pending'}}
-            </li>
-      
-            <li class="list-group-item" *ngIf="defect; else pendingDate">
-              {{ defect.createdDate | date:'dd-MM-yyyy HH:mm' }}
-            </li>
             
-            <ng-template #pendingDate>
-              <li class="list-group-item">---</li>
-            </ng-template>
+            <li class="list-group-item"> {{ i + 1 }}</li>
       
+            <li class="list-group-item">
+              {{ defect?.defectName || ''}}
+            </li>
+      
+            <li class="list-group-item">
+              {{ defect?.createdDate | date:'dd-MM-yyyy HH:mm' }}
+            </li>
+      
+            <li class="list-group-item">
+              {{ defect?.lastUpdatedDate | date:'dd-MM-yyyy HH:mm'  }}
+            </li>
+      
+            <li class="list-group-item">
+              {{ defect?.decision || ''}}
+            </li>  
+      
+            <li class="list-group-item">
+              <div class="d-flex gap-2">
+                <button class="custom-accept-btn btn btn-sm" (click)="selectDesicion('Accept',i)">Accept</button>
+                <button class="custom-reject-btn btn btn-sm" (click)="selectDesicion('Reject',i)">Reject</button>
+              </div>
+            </li>
+             
           </ul>
         </div>
       </div>
@@ -103,6 +103,97 @@
     </div>
    
   </div>
+
+
+  <div class="modal fade" id="acceptModal" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <h4 class="custom-h4" >Are you sure you want to accept this pant ?</h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        
+        <div class="modal-body">
+          
+          <div class="form-container">              
+            <div class="dropdown">
+              <button class="btn btn-secondary dropdown-toggle custom-dropdown-btn" type="button" id="defectDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                {{ selectedDefectName || "Select Defect" }}
+              </button>
+              <ul class="dropdown-menu custom-small-dropdown-list" aria-labelledby="defectDropdown">
+                <li *ngFor="let defect of getDefectsForModal('accept')">
+                  <a class="dropdown-item" (click)="selectDefect(defect.defectName, defect.id)">
+                    {{ defect.defectName }}
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item" (click)="clearDefectSelection()">Clear Selection</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+         
+        </div>
+
+        <div class="modal-footer">
+
+          <div class="d-flex justify-content-evenly gap-4" style="width: 100%;">
+            <button type="button" class="btn btn-primary custom-btn" (click)="addOrderDefetc()">Yes</button>
+            <button type="button" data-bs-dismiss="modal" class="btn btn-primary custom-btn" >No</button>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal fade" id="rejectModal" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <h4 class="custom-h4" >Are you sure you want to reject this pant ?</h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        
+        <div class="modal-body">
+          
+          <div class="form-container">              
+            <div class="dropdown">
+              <button class="btn btn-secondary dropdown-toggle custom-dropdown-btn" type="button" id="defectDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                {{ selectedDefectName || "Select Defect" }}
+              </button>
+              <ul class="dropdown-menu custom-dropdown-list" aria-labelledby="defectDropdown">
+                <li *ngFor="let defect of getDefectsForModal('reject')">
+                  <a class="dropdown-item" (click)="selectDefect(defect.defectName, defect.id)">
+                    {{ defect.defectName }}
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item" (click)="clearDefectSelection()">Clear Selection</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+         
+        </div>
+
+        <div class="modal-footer">
+
+          <div class="d-flex justify-content-evenly gap-4" style="width: 100%;">
+            <button type="button" class="btn btn-primary custom-btn" (click)="addOrderDefetc()">Yes</button>
+            <button type="button" data-bs-dismiss="modal" class="btn btn-primary custom-btn" >No</button>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+
  
 </div>
 

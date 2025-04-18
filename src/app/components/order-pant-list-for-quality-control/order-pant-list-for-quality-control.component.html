@@ -1,0 +1,58 @@
+<div *ngIf="dataLoaded == false" class="d-flex justify-content-center align-items-center">
+  <div class="spinner-border custom-spinner" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
+
+<div class="container">
+
+<div class="search-bar-container">
+  <input
+    type="text"
+    class="form-control mb-3"
+    placeholder="Search"
+    [(ngModel)]="searchOrder"
+    (input)="filterOrders()"
+  />
+</div>
+
+<div class="table-container">
+  <table *ngIf="dataLoaded && filteredOrders.length > 0" class="table table-striped">
+    <thead class="custom-th">
+      <tr>
+        <th>#</th>
+        <th>Order Number</th>
+        <th>Model</th>    
+        <th>Quantity</th>
+        <th>Created Date</th>
+        <th>Control</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr 
+        *ngFor="let order of filteredOrders; let i = index"
+        class="cursor-pointer hover:bg-light" 
+      >
+        <td>{{ i + 1 }}</td>
+        <td>{{ order.orderNumber }}</td>
+        <td>{{ order.modelName }}</td>   
+        <td>{{ order.pantQuantity }}</td>
+        <td>{{ order.createdDate | date:'dd-MM-yyyy HH:mm' }}</td>
+        <td>
+          <button class="control-button" (click)="orderSelected(order)">     
+            <i class="bi bi-clipboard-check"></i>
+          </button>         
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+
+<div *ngIf="dataLoaded && filteredOrders.length == 0" style= "padding: 50px;">
+  No order data found
+</div>
+
+</div>
+

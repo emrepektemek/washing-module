@@ -9,6 +9,9 @@ import { WashingComponent } from './components/washing-process/washing-process.c
 import { OrderPantListForWashingComponent } from './components/order-pant-list-for-washing/order-pant-list-for-washing.component';
 import { OrderPantListForDefectComponent } from './components/order-pant-list-for-defect/order-pant-list-for-defect.component';
 import { DefectControlComponent } from './components/defect-control/defect-control.component';
+import { OrderPantListForQualityControlComponent } from './components/order-pant-list-for-quality-control/order-pant-list-for-quality-control.component';
+import { QualityControlComponent } from './components/quality-control/quality-control.component';
+import { QualityControlSummaryComponent } from './components/quality-control-summary/quality-control-summary.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -25,6 +28,15 @@ export const routes: Routes = [
       { path: 'machine', component: MachineAddComponent },
       { path: 'defect', component: OrderPantListForDefectComponent },
       { path: 'defect-control', component: DefectControlComponent },
+      {
+        path: 'quality-control',
+        component: OrderPantListForQualityControlComponent,
+      },
+      {
+        path: 'quality-control-summary',
+        component: QualityControlSummaryComponent,
+      },
+      { path: 'quality-control-process', component: QualityControlComponent },
     ],
   },
 ];

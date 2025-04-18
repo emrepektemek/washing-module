@@ -6,7 +6,7 @@
 
 <div class="container no-padding"> 
  
-  <div class="washing-type-container" *ngIf="dataLoaded && washes.length != 0">
+  <div class="washing-type-container" *ngIf="dataLoaded">
 
     <div class="washing-type-header-container">
       <img src="assets/images/info.png" alt="Washing Icon" class="header-icon">
@@ -18,13 +18,29 @@
     <div class="washing-type-list">
       <ul>      
         <li *ngFor="let washingType of washingTypes">
-          <p class="washing-type-list-title">{{ washingType.washingTypeName }}</p>
-          <p class="washing-type-list-p">{{ washingType.description }}</p>
+          <div class="washing-type-header">
+            <p class="washing-type-list-title">{{ washingType.washingTypeName }}</p>
+            <span class="washing-time-badge">
+              ⏱️ {{ washingType.washingTime }} min
+            </span>
+          </div>
+          <p class="washing-type-list-p">{{ washingType.description }}</p>     
         </li>  
       </ul>
     </div>
 
   </div>
+
+  <div *ngIf="dataLoaded && washes.length == 0" style= "padding: 30px; text-align: center; flex: 3;">
+    <p>
+      No wash data found
+    </p>
+    <div class="custom-btn-container" *ngIf="dataLoaded && washes.length == 0">
+      <button class="btn custom-btn" type="submit" (click)="openWashStartModal()" >Start New Wash</button>
+    </div>
+  </div>
+
+ 
 
 
   <div class="washing-history-container" *ngIf="dataLoaded && washes.length != 0" >
@@ -33,9 +49,15 @@
       <li class="list-group-item image-column">
         <img src="assets/images/order.png" class="img-fluid" alt="Pant">
       </li>
+
       <li class="list-group-item image-column">
         <img src="assets/images/pant.png" class="img-fluid" alt="Pant">
       </li>
+
+      <li class="list-group-item image-column">
+        <img src="assets/images/washing-type.png" class="img-fluid" alt="Pant">
+      </li>
+
       <li class="list-group-item image-column">
         <img src="assets/images/washing-machine.png" class="img-fluid" alt="Pant">
       </li>
@@ -57,8 +79,9 @@
 
       <ul class="list-group list-group-horizontal">
         <li class="list-group-item">{{ wash.orderNumber }}</li>
-        <li class="list-group-item">{{ wash.modelName }}</li>    
+        <li class="list-group-item">{{wash.pantQuantity}} {{ wash.modelName }}</li>    
         <li class="list-group-item">{{ wash.washingTypeName }}</li>
+        <li class="list-group-item">{{ wash.machineName}} {{ wash.machineType}}</li>
         <li class="list-group-item">{{ wash.washingTime }} Min</li>
         <li class="list-group-item">
           {{ wash.createdDate | date:'dd-MM-yyyy HH:mm' }}
@@ -108,7 +131,29 @@
             </ul>
           </div>
         </div>  
-        
+
+
+        <div class="form-container">              
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle custom-dropdown-btn" type="button" id="machineDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                {{ selectedMachineName || "Select Machine" }}
+            </button>
+            <ul class="dropdown-menu custom-dropdown-list" aria-labelledby="machineDropdown">
+                <li *ngFor="let machine of machines">
+                    <a class="dropdown-item d-flex justify-content-between align-items-center"
+                       (click)="selectMachine(machine)">
+                        <span>{{ machine.machineName }}</span>
+                        <small class="text-muted ms-2">{{ machine.machineType }}</small>
+                    </a>
+                </li>
+                <li>
+                    <a class="dropdown-item" (click)="clearMachine()">Clear Selection</a>
+                </li>
+            </ul>
+          </div>
+        </div>
+
+
         <div class="form-container">
           <div class="dropdown">
               <button class="btn btn-secondary dropdown-toggle custom-dropdown-btn" type="button" id="shiftDropdown" data-bs-toggle="dropdown" aria-expanded="false">
@@ -139,13 +184,7 @@
 </div>
 
 
-<div *ngIf="dataLoaded && washes.length == 0" style= "padding: 30px; text-align: center;">
-  No wash data found
-</div>
 
-<div class="custom-btn-container" *ngIf="dataLoaded && washes.length == 0">
-  <button class="btn custom-btn" type="submit" (click)="openWashStartModal()" >Start New Wash</button>
-</div>
 
 
 

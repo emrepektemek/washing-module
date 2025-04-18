@@ -20,6 +20,8 @@ import { DefectService } from '../../services/defect.service';
 import { DefectState } from '../../store/defect.state';
 import { OrderDefectService } from '../../services/order-defect.service';
 import { OrderDefectState } from '../../store/order-defect.state';
+import { MachineService } from '../../services/machine.service';
+import { MachineState } from '../../store/machine.state';
 
 @Component({
   selector: 'app-home',
@@ -46,7 +48,9 @@ export class HomeComponent implements OnInit {
     private defectService: DefectService,
     private defectState: DefectState,
     private orderDefectService: OrderDefectService,
-    private orderDefectState: OrderDefectState
+    private orderDefectState: OrderDefectState,
+    private machineService: MachineService,
+    private machineState: MachineState
   ) {}
 
   ngOnInit(): void {
@@ -76,10 +80,14 @@ export class HomeComponent implements OnInit {
         concatMap((defects) => {
           this.defectState.setDefects(defects.data);
           return this.orderDefectService.getOrderDefects();
+        }),
+        concatMap((orderDefects) => {
+          this.orderDefectState.setOrderDefect(orderDefects.data);
+          return this.machineService.getMachines();
         })
       )
-      .subscribe((orderDefects) => {
-        this.orderDefectState.setOrderDefect(orderDefects.data);
+      .subscribe((machines) => {
+        this.machineState.setMachines(machines.data);
         this.dataLoaded = true;
       });
   }
@@ -92,6 +100,7 @@ export class HomeComponent implements OnInit {
     this.washState.clearWashes();
     this.defectState.clearDefects();
     this.orderDefectState.clearOrderDefect();
+    this.machineState.clearMachines();
     this.router.navigate(['/login']);
     this.toastrService.info('Logged out');
   }

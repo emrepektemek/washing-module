@@ -24,6 +24,10 @@ export class NavigationTabsComponent {
   selectTab(index: number) {
     this.selectedIndex = index;
 
+    if (index === 0) {
+      this.router.navigate(['/home/quality-control']);
+    }
+
     if (index === 1) {
       this.router.navigate(['/home/washing']);
     }

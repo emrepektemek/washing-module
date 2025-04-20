@@ -32,17 +32,14 @@
       <tr 
         *ngFor="let order of filteredOrders; let i = index"
         class="cursor-pointer hover:bg-light" 
+        (click)="orderSelected(order)"
       >
         <td>{{ i + 1 }}</td>
         <td>{{ order.orderNumber }}</td>
         <td>{{ order.modelName }}</td>   
         <td>{{ order.pantQuantity }}</td>
         <td>{{ order.createdDate | date:'dd-MM-yyyy HH:mm' }}</td>
-        <td>
-          <button class="control-button" (click)="orderSelected(order)">     
-            <i class="bi bi-clipboard-check"></i>
-          </button>         
-        </td>
+        <td>{{ getQualityControlResult(order.id) }}</td>
       </tr>
     </tbody>
   </table>

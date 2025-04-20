@@ -5,6 +5,8 @@ import { forkJoin, take } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { QualityControlState } from '../../store/quality-control.state';
+import { QualityControl } from '../../models/qualityControl';
 
 @Component({
   selector: 'app-order-pant-list-for-quality-control',
@@ -15,20 +17,28 @@ import { Router } from '@angular/router';
 export class OrderPantListForQualityControlComponent implements OnInit {
   orders: OrderPantModel[] = [];
   filteredOrders: OrderPantModel[] = [];
+  qualityControls: QualityControl[] = [];
 
   searchOrder: string = '';
 
   dataLoaded: boolean = false;
 
-  constructor(private orderState: OrderState, private router: Router) {}
+  constructor(
+    private orderState: OrderState,
+    private qualityControlState: QualityControlState,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     forkJoin({
       orders: this.orderState.orders$.pipe(take(1)),
-    }).subscribe(({ orders }) => {
+      qualityControls: this.qualityControlState.qualityControls$.pipe(take(1)),
+    }).subscribe(({ orders, qualityControls }) => {
       this.orders = orders;
-      this.dataLoaded = true;
+      this.qualityControls = qualityControls;
       this.filteredOrders = this.orders;
+      console.log(qualityControls);
+      this.dataLoaded = true;
     });
   }
 
@@ -49,5 +59,13 @@ export class OrderPantListForQualityControlComponent implements OnInit {
     this.router.navigate(['/home/quality-control-summary'], {
       state: { selectedOrder: order },
     });
+  }
+
+  getQualityControlResult(orderId: number): string {
+    const control = this.qualityControls.find((qc) => qc.orderId === orderId);
+    if (!control || !control.result) {
+      return 'Not Finished';
+    }
+    return control.result;
   }
 }

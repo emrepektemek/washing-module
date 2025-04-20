@@ -1,0 +1,211 @@
+/*main container*/
+
+.container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;       
+  max-width: none;   
+  padding-left: 30px;   
+  padding-right: 30px;  
+  margin-left: 0;    
+  margin-right: 0;   
+}
+  
+  /*Spinner*/
+  
+.custom-spinner {
+  border-top-color: rgb(66, 83, 206); 
+  border-right-color: rgb(66, 83, 206); 
+  border-left-color: rgb(66, 83, 206); 
+}
+
+
+  /*Chart*/
+
+.chart-container {
+  flex: 1;
+  min-height: 490px; 
+  padding: 20px;
+  border-radius: 8px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.summary-stats {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.total-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.summary-stats {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.stat-box {
+  padding: 6px;
+  border-radius: 8px;
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  min-width: 150px;
+  text-align: center;
+}
+
+.stat-box.accept {
+  background-color: #00ae06;
+}
+
+.stat-box.reject {
+  background-color: #c90014;
+}
+
+.stat-box.not-decided {
+  background-color: #a6a6a6;
+}
+
+.stat-box.total {
+  background-color: rgb(66, 83, 206); 
+}
+
+/*Defect List*/
+
+.order-defect-list-container {
+  max-height: 490px; 
+  overflow-y: auto;
+  padding-right: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #fff;
+  padding: 16px; 
+  border-radius: 15px; 
+}
+
+.order-defect-list-container.no-items {
+  display: flex;
+  margin-top: 160px;   
+  max-height: 490px;      
+  border-radius: 8px;
+  font-size: 16px;
+  color: black;
+  text-align: center;
+}
+
+.order-defect-list-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.order-defect-list-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.order-defect-list-container::-webkit-scrollbar-thumb {
+  background: #c4c4c4;
+  border-radius: 10px;
+}
+
+.order-defect-list-container::-webkit-scrollbar-thumb:hover {
+  background: #a0a0a0;
+}
+
+.defect-card {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 16px 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.defect-card:hover {
+  transform: scale(1.01);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.defect-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.order-number {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 13px;
+}
+
+.decision-tag {
+  padding: 4px 12px;
+  border-radius: 13px;
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 13px;
+  text-transform: uppercase;
+  color: white;
+}
+
+.decision-tag.accept {
+  background-color: #00ae06;
+}
+
+.decision-tag.reject {
+  background-color: #c90014;
+}
+
+
+.defect-body {
+  font-size: 14px;
+  color: #555;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.defect-body > div {
+  margin-bottom: 8px; 
+}
+
+/* Quality Control Button*/
+
+.custom-btn-container {
+  display: flex;
+  justify-content: center;  
+  margin-top: 15px;
+}
+
+.custom-btn {
+  width: 170px;
+  padding: 10px;
+  margin-top: 20px;
+  background-color: rgb(66, 83, 206); 
+  color: white; 
+  border: none; 
+  border-radius: 5px; 
+  font-size: 14px;
+  font-weight: 500;
+}
+
+  

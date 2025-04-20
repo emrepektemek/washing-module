@@ -9,7 +9,6 @@ import { CommonModule } from '@angular/common';
 import { OrderDefectWithDefectAndOrderModel } from '../../models/orderDefectWithDefectAndOrderModel';
 import { OrderDefectAddModel } from '../../models/orderDefectAddModel';
 import { OrderDefectService } from '../../services/order-defect.service';
-import { clear } from 'node:console';
 
 declare var bootstrap: any;
 
@@ -48,8 +47,6 @@ export class DefectControlComponent implements OnInit {
   ngOnInit(): void {
     this.selectedOrder = history.state.selectedOrder;
 
-    console.log('selectedOrder', this.selectedOrder);
-
     forkJoin({
       orderDefects: this.orderDefectState.orderDefects$.pipe(
         take(1),
@@ -63,8 +60,6 @@ export class DefectControlComponent implements OnInit {
     }).subscribe(({ orderDefects, defetcs }) => {
       this.orderDefects = orderDefects;
       this.defects = defetcs;
-      console.log('orderDefects', orderDefects);
-      console.log('defetcs', defetcs);
 
       const pantQuantity = this.selectedOrder.pantQuantity || 0;
 

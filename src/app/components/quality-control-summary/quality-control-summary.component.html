@@ -1,1 +1,80 @@
-<p>quality-control-summary works!</p>
+<div *ngIf="dataLoaded == false" class="d-flex justify-content-center align-items-center">
+    <div class="spinner-border custom-spinner" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+</div>
+
+
+<div class="container no-padding"> 
+ 
+  <div class="chart-container" *ngIf="dataLoaded">
+    
+    <apx-chart
+      [series]="chartSeries"
+      [chart]="chartOptions.chart"
+      [labels]="chartOptions.labels"
+      [colors]="chartOptions.colors"
+      [responsive]="chartOptions.responsive"
+      [legend]="chartOptions.legend"
+      [dataLabels]="chartOptions.dataLabels"
+    ></apx-chart>
+
+
+    <div class="total-wrapper">
+      <div class="stat-box total">
+        <strong>Total </strong> {{ totalPantQuantity }}
+      </div>
+    </div>
+
+
+    <div class="summary-stats">
+     
+      <div class="stat-box accept">
+        <strong>Accept </strong> {{ acceptCount }}
+      </div>
+      <div class="stat-box reject">
+        <strong>Reject </strong> {{ rejectCount }}
+      </div>
+      <div class="stat-box not-decided">
+        <strong>Not Decided </strong> {{ notDecidedCount }}
+      </div>
+    </div>
+
+
+
+  </div>
+
+  <div class="order-defect-list-container" *ngIf="dataLoaded && orderDefects.length > 0">
+    <div *ngFor="let item of orderDefects" class="defect-card">
+      <div class="defect-header">
+        <span class="order-number">{{ item.orderNumber }}</span>
+        <span 
+          class="decision-tag" 
+          [ngClass]="{
+            'accept': item.decision === 'Accept',
+            'reject': item.decision === 'Reject',
+            'not-decided': !item.decision || item.decision === null
+          }"
+        >
+          {{ item.decision || 'Not Decided' }}
+        </span>
+      </div>
+      <div class="defect-body">
+        <div><strong>Row:</strong> {{ item.rowNumber }}</div>
+        <div><strong>Defect:</strong> {{ item.defectName }}</div>
+        <div><strong>Pant Quantity:</strong> {{ item.pantQuantity }}</div>
+        <div><strong>Created:</strong> {{ item.createdDate | date: 'dd-MM-yyyy HH:mm' }}</div>
+        <div><strong>Last Updated:</strong> {{ item.lastUpdatedDate| date: 'dd-MM-yyyy HH:mm' }}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="order-defect-list-container no-items" *ngIf="dataLoaded && orderDefects.length === 0">
+    No decision data found
+  </div>
+</div>    
+
+
+<div class="custom-btn-container" *ngIf="dataLoaded">
+  <button class="btn custom-btn" type="submit" (click)="startQualityControl()" > Start Quality Control</button>
+</div>

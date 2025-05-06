@@ -44,7 +44,7 @@
 .total-wrapper {
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  margin-top: 40px;
   margin-bottom: 10px;
 }
 
@@ -121,12 +121,12 @@
 }
 
 .order-defect-list-container::-webkit-scrollbar-thumb {
-  background: #c4c4c4;
+  background: rgb(66, 83, 206); 
   border-radius: 10px;
 }
 
 .order-defect-list-container::-webkit-scrollbar-thumb:hover {
-  background: #a0a0a0;
+  background: rgb(66, 83, 206); 
 }
 
 .defect-card {
@@ -193,7 +193,6 @@
 .custom-btn-container {
   display: flex;
   justify-content: center;  
-  margin-top: 15px;
 }
 
 .custom-btn {
@@ -208,4 +207,78 @@
   font-weight: 500;
 }
 
+
+/*Final Desicion Buttons*/
+
+.buttons-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.desicion-btn {
+  padding: 6px;
+  border-radius: 8px;
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  min-width: 110px;
+  text-align: center;
+  background-color: rgb(66, 83, 206); 
   
+}
+
+
+/*Modals*/
+
+.modal-content {
+  padding-bottom: 20px; 
+}
+
+.modal-header, .modal-footer {
+  border: none;
+  position: relative; 
+}
+
+.custom-h4{
+  text-align: center;
+  color: black;
+  padding: 12px;
+  font-size: 19px;
+}
+
+.modal-body {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  gap: 20px; 
+}
+
+.modal-body .form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.modal-body .form-select,
+.modal-body .form-control {
+  width: 100%;
+}
+
+.btn-close {
+  position: absolute;
+  top: 20px; 
+  right: 20px;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  gap: 20px; 
+}
+

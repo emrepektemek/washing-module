@@ -1,30 +1,35 @@
 .tabs-container {
   display: flex;
-  flex:1;
+  flex: 1;
   width: 100%;
-  display: flex;
   justify-content: center;
   align-items: center;
 }
-  
+
 .tabs {
   position: relative;
   display: flex;
-  background: rgb(66, 83, 206); 
+  background: rgb(66, 83, 206);
   border-radius: 8px;
   padding: 5px;
-
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Tablar arasında hafif bir gölge efekti */
 }
-  
+
 .tab {
   padding: 10px 20px;
   cursor: pointer;
-  transition: color 0.3s ease;
-  color: rgb(26, 33, 83); 
+  transition: color 0.3s ease, transform 0.3s ease; /* Yumuşak renk geçişi ve animasyon */
+  color: rgb(26, 33, 83);
+  font-size: 16px;
+}
+
+.tab:hover {
+  transform: scale(1.1); /* Hover durumunda sekme büyür */
+  color: white; /* Hover ile renk beyaza döner */
 }
 
 .tab.active {
   color: white;
   font-weight: bold;
-}
 
+}

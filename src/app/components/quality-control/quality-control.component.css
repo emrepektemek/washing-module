@@ -1,0 +1,147 @@
+
+/*main container*/
+
+.container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;    
+  height: 100%;   
+  max-width: none; 
+  max-height: 700px;  
+  padding-left: 30px;   
+  padding-right: 30px;  
+  margin-left: 0;    
+  margin-right: 0;   
+}
+    
+/*Spinner*/
+
+.custom-spinner {
+  border-top-color: rgb(66, 83, 206); 
+  border-right-color: rgb(66, 83, 206); 
+  border-left-color: rgb(66, 83, 206); 
+}
+
+
+/*Quality Control*/
+
+.quality-control-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  margin-top: 20px;
+  gap: 10px; 
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.row-container {
+  display: grid;
+  padding: 5px;
+  width: 15%;
+  background: rgb(66, 83, 206);
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  color: white;
+}
+
+
+.defect-container {
+  flex: 6;
+  padding: 15px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+
+  display: grid;
+  grid-template-columns: repeat(6, 1fr); /* 6 sütun */
+  gap: 12px;
+  height: 100%;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.defect-item {
+  background-color: rgb(170, 170, 170);
+  color: white;
+  border-radius: 6px;
+  padding: 8px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 80px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  transition: background-color 0.2s ease-in-out;
+}
+
+.defect-item .category {
+  font-size: 12px;
+  text-transform: lowercase;
+  opacity: 0.8;
+}
+
+.defect-item .defect-name {
+  font-size: 14px;
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+.defect-item.selected {
+  background-color: rgb(66, 83, 206);
+}
+
+.hint-button {
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  font-size: 14px;
+  text-align: center;
+  line-height: 24px;
+  margin: 8px auto 0;
+  display: block;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.hint-button:hover {
+  background-color: #333;
+}
+
+
+.decision-container {
+  display: grid;
+  padding: 5px;
+  border-radius: 8px;
+  align-items: center;
+  justify-content: center;
+  width: 20%;
+}
+
+.custom-btn {
+  width: 170px;
+  padding: 10px;
+  margin-top: 20px;
+  background-color: rgb(66, 83, 206); 
+  color: white; 
+  border: none; 
+  border-radius: 5px; 
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.finish-container {
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-top: 200px;
+}
+
+
+

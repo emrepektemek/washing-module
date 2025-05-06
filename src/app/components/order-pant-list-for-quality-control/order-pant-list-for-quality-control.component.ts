@@ -56,8 +56,15 @@ export class OrderPantListForQualityControlComponent implements OnInit {
   }
 
   orderSelected(order: OrderPantModel): void {
+    const selectedQualityControl = this.qualityControls.find(
+      (qc) => qc.orderId === order.id
+    );
+
     this.router.navigate(['/home/quality-control-summary'], {
-      state: { selectedOrder: order },
+      state: {
+        selectedOrder: order,
+        selectedQualityControl: selectedQualityControl,
+      },
     });
   }
 

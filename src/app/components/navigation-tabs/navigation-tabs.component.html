@@ -2,7 +2,7 @@
     <div class="tabs" #tabsContainer>
       <div *ngFor="let tab of tabs; let i = index" 
            class="tab" 
-           [class.active]="selectedIndex === i"
+           [ngClass]="{ 'active': selectedIndex === i }" 
            (click)="selectTab(i)">
         {{ tab.label }}
       </div>

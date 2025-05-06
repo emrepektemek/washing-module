@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,18 +8,38 @@ import { Router } from '@angular/router';
   templateUrl: './navigation-tabs.component.html',
   styleUrl: './navigation-tabs.component.css',
 })
-export class NavigationTabsComponent {
-  constructor(private router: Router) {}
-
+export class NavigationTabsComponent implements OnInit {
   tabs = [
-    { label: 'Quality Control' },
-    { label: 'Washing' },
-    { label: 'Order' },
-    { label: 'Machine' },
-    { label: 'Defect' },
+    { label: 'Quality Control', path: '/home/quality-control' },
+    { label: 'Washing', path: '/home/washing' },
+    { label: 'Order', path: '/home/order' },
+    { label: 'Machine', path: '/home/machine' },
+    { label: 'Defect', path: '/home/defect' },
   ];
 
-  selectedIndex = 0;
+  constructor(private router: Router) {}
+
+  ngOnInit(): void {
+    const savedTabIndex = localStorage.getItem('selectedTabIndex');
+    const currentPath = this.router.url;
+
+    if (savedTabIndex) {
+      this.selectedIndex = +savedTabIndex;
+      this.router.navigate([this.tabs[this.selectedIndex].path]);
+    } else {
+      const matchedTabIndex = this.tabs.findIndex(
+        (tab) => tab.path === currentPath
+      );
+      if (matchedTabIndex !== -1) {
+        this.selectedIndex = matchedTabIndex;
+      } else if (currentPath === '/home') {
+        this.selectedIndex = 0;
+        this.router.navigate(['/home/quality-control']);
+      }
+    }
+  }
+
+  selectedIndex: number = 0;
 
   selectTab(index: number) {
     this.selectedIndex = index;
@@ -39,6 +59,7 @@ export class NavigationTabsComponent {
     if (index === 3) {
       this.router.navigate(['/home/machine']);
     }
+
     if (index === 4) {
       this.router.navigate(['/home/defect']);
     }

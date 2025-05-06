@@ -1,1 +1,41 @@
-<p>quality-control works!</p>
+<div *ngIf="dataLoaded == false " class="d-flex justify-content-center align-items-center">
+    <div class="spinner-border custom-spinner" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+</div>
+
+<div class="container no-padding"> 
+
+  <div *ngIf="currentIndex <= selectedOrder.pantQuantity" class="quality-control-container" [@rowTransition]="animationState">
+
+    <div class="row-container">
+      <h4>Row {{ currentIndex }}</h4>  
+    </div>
+
+    <div class="defect-container">
+      <ng-container *ngIf="defects && defects.length">
+        <div
+          *ngFor="let defect of defects"
+          class="defect-item"
+          [class.selected]="defect.id === selectedDefectId"
+          (click)="selectDefect(defect.id, defect.defectCategoryId)"
+        >
+        <small class="category">{{ defect.categoryName }}</small>
+        <div class="defect-name">{{ defect.defectName }}</div>   
+        </div>
+      </ng-container>
+    </div>
+
+    <div class="decision-container">
+      <button class="btn custom-btn" type="submit" (click)="saveDecision()" >Save Decision</button> 
+    </div>  
+      
+  </div>
+
+  <div *ngIf="currentIndex > selectedOrder.pantQuantity" class="finish-container">
+    
+    <h6>Quality control completed, Go back and make your final decision</h6>
+  
+  </div>    
+
+

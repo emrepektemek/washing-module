@@ -51,7 +51,7 @@ tr td {
     background-color: white;
     color: black;
     padding: 10px; 
-    
+    padding-bottom: 17px;
 }
 
 th:not(:first-child):last-child,

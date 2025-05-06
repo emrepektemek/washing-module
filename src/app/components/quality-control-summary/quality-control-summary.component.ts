@@ -12,6 +12,13 @@ import {
   ApexLegend,
   ApexDataLabels,
 } from 'ng-apexcharts';
+import { Router } from '@angular/router';
+import { QualityControl } from '../../models/qualityControl';
+import { QualityControlFinalDecisionModel } from '../../models/qualityControlFinalDecisionModel';
+import { QualityControlService } from '../../services/quality-control.service';
+import { ToastrService } from 'ngx-toastr';
+
+declare var bootstrap: any;
 
 @Component({
   selector: 'app-quality-control-summary',
@@ -21,6 +28,9 @@ import {
 })
 export class QualityControlSummaryComponent implements OnInit {
   selectedOrder: OrderPantModel;
+  selectedQualityControl: QualityControl;
+
+  selectedResult: string = '';
 
   orderDefects: OrderDefectWithDefectAndOrderModel[] = [];
 
@@ -45,12 +55,22 @@ export class QualityControlSummaryComponent implements OnInit {
     colors: string[];
   };
 
-  dataLoaded: boolean = false;
+  finalDecisionModalElement: any;
 
-  constructor(private orderDefectState: OrderDefectState) {}
+  dataLoaded: boolean = false;
+  dataUpdated: boolean = true;
+
+  constructor(
+    private orderDefectState: OrderDefectState,
+    private qualityControlService: QualityControlService,
+    private toastrService: ToastrService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.selectedOrder = history.state.selectedOrder;
+
+    this.selectedQualityControl = history.state.selectedQualityControl;
 
     forkJoin({
       orderDefects: this.orderDefectState.orderDefects$.pipe(
@@ -74,7 +94,6 @@ export class QualityControlSummaryComponent implements OnInit {
       ).length;
       this.notDecidedCount =
         this.totalPantQuantity - this.acceptCount - this.rejectCount;
-
       this.acceptPercentage = Math.round(
         (this.acceptCount / this.totalPantQuantity) * 100
       );
@@ -83,8 +102,6 @@ export class QualityControlSummaryComponent implements OnInit {
       );
       this.notDecidedPercentage =
         100 - this.acceptPercentage - this.rejectPercentage;
-
-      console.log('orderDefects', orderDefects);
 
       this.chartSeries = [
         this.acceptPercentage,
@@ -123,9 +140,49 @@ export class QualityControlSummaryComponent implements OnInit {
 
       this.dataLoaded = true;
     });
+
+    this.finalDecisionModalElement = new bootstrap.Modal(
+      document.getElementById('finalDecisionModal')!
+    );
   }
 
   startQualityControl() {
-    console.log('Quality control başlatılıyor...');
+    this.router.navigate(['/home/quality-control-process'], {
+      state: { selectedOrder: this.selectedOrder },
+    });
+  }
+
+  openModal(result: string) {
+    this.selectedResult = result;
+
+    this.finalDecisionModalElement.show();
+  }
+
+  finalDecision() {
+    let qualityControlUpdateObject: QualityControlFinalDecisionModel = {
+      orderId: this.selectedOrder.id,
+      result: this.selectedResult,
+    };
+
+    this.dataUpdated = false;
+
+    this.qualityControlService.update(qualityControlUpdateObject).subscribe(
+      (response) => {
+        this.toastrService.info(response.message);
+        this.selectedResult = '';
+        this.finalDecisionModalElement.hide();
+        this.dataUpdated = true;
+      },
+      (responseError) => {
+        this.dataUpdated = true;
+        if (responseError.error.ValidationErrors) {
+          this.toastrService.error(
+            responseError.error.ValidationErrors[0].ErrorMessage
+          );
+        } else {
+          this.toastrService.error(responseError.error.message);
+        }
+      }
+    );
   }
 }
